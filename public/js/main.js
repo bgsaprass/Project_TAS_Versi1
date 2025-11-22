@@ -26,10 +26,10 @@
             } else {
                 $('.fixed-top').removeClass('shadow').css('top', 0);
             }
-        } 
+        }
     });
-    
-    
+
+
    // Back to top button
    $(window).scroll(function () {
     if ($(this).scrollTop() > 300) {
@@ -79,37 +79,22 @@
 
 
     // vegetable carousel
+    $(document).ready(function(){
     $(".vegetable-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 1500,
-        center: false,
-        dots: true,
-        loop: true,
-        margin: 25,
-        nav : true,
-        navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
-        ],
-        responsiveClass: true,
-        responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:1
-            },
-            768:{
-                items:2
-            },
-            992:{
-                items:3
-            },
-            1200:{
-                items:4
-            }
+        autoplay:true,
+        smartSpeed:1500,
+        loop:true,
+        margin:18,
+        nav:true,
+        dots:true,
+        responsive:{
+            0:{ items:1, stagePadding:0 },
+            576:{ items:2, stagePadding:0 },
+            768:{ items:3, stagePadding:20 },
+            992:{ items:4, stagePadding:30 }
         }
     });
+});
 
 
     // Modal Video
@@ -149,3 +134,5 @@
 
 })(jQuery);
 
+
+console.log("Owl Carousel item count:", $(".vegetable-carousel .vesitable-item").length);

@@ -258,7 +258,7 @@
     transform: translate(-50%);
     transform: rotate(45deg);
     background: var(--bs-secondary);
-    
+
 }
 /*** featurs End ***/
 
@@ -266,10 +266,10 @@
 /*** service Start ***/
 .service .service-item .service-content {
     position: relative;
-    width: 250px; 
-    height: 130px; 
-    top: -50%; 
-    left: 50%; 
+    width: 250px;
+    height: 130px;
+    top: -50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
@@ -282,7 +282,7 @@
 }
 
 .fruite .tab-class .nav-item a.active span {
-    color: var(--bs-white) !important; 
+    color: var(--bs-white) !important;
 }
 
 .fruite .fruite-categorie .fruite-name {
@@ -335,10 +335,15 @@
     overflow: hidden;
     transition: 0.5s;
     border-radius: 10px 10px 0 0;
+    height: 320px; /* constrain image container height */
 }
 
 .vesitable .vesitable-item .vesitable-img img {
     transition: 0.5s;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ensure image covers container without distortion */
+    display: block;
 }
 
 .vesitable .vesitable-item .vesitable-img img:hover {
@@ -381,6 +386,62 @@
 .vesitable .owl-nav .owl-next:hover {
     background: var(--bs-secondary);
     color: var(--bs-white);
+}
+/* Make neighboring items partially visible and constrain item width */
+.vesitable .owl-stage-outer{
+    overflow: visible;
+}
+
+.vesitable .vesitable-item{
+    max-width: 360px; /* control card width to match example */
+    margin: 0 12px; /* spacing between cards */
+}
+
+/* Style navigation buttons to be round with light background and colored border */
+.vesitable .owl-nav {
+    position: absolute;
+    top: 8px;
+    right: 32px;
+    z-index: 30;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Style prev/next as small rounded pills (works for button or anchor output by Owl) */
+.vesitable .owl-nav .owl-prev,
+.vesitable .owl-nav .owl-next,
+.vesitable .owl-nav button.owl-prev,
+.vesitable .owl-nav button.owl-next{
+    background: #fff;
+    border: 2px solid #f7b500; /* orange border */
+    color: #7fc242; /* green icon color */
+    min-width: 44px;
+    height: 36px;
+    border-radius: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    font-size: 18px;
+}
+.vesitable .owl-nav .owl-prev:hover,
+.vesitable .owl-nav .owl-next:hover,
+.vesitable .owl-nav button.owl-prev:hover,
+.vesitable .owl-nav button.owl-next:hover{
+    background: #7fc242;
+    color: #fff;
+    border-color: #7fc242;
+}
+
+/* Make card border thinner and green like example */
+.vesitable .border-primary{
+    border-color: #9bd14a !important;
+}
+
+@media (max-width: 767px){
+    .vesitable .vesitable-img{height:220px}
+    .vesitable .vesitable-item{max-width:100%; margin: 0 6px}
 }
 /*** vesitable End ***/
 
@@ -455,7 +516,7 @@
 .pagination {
     display: inline-block;
 }
-  
+
 .pagination a {
     color: var(--bs-dark);
     padding: 10px 16px;
@@ -464,13 +525,13 @@
     border: 1px solid var(--bs-secondary);
     margin: 0 4px;
 }
-  
+
 .pagination a.active {
     background-color: var(--bs-primary);
     color: var(--bs-light);
     border: 1px solid var(--bs-secondary);
 }
-  
+
 .pagination a:hover:not(.active) {background-color: var(--bs-primary)}
 
 .nav.nav-tabs .nav-link.active {
@@ -494,4 +555,36 @@
     line-height: 35px;
 }
 /*** Footer End ***/
+
+
+/* Tambahan Kelompok */
+
+/* Bagian Slide  */
+.vesitable .vesitable-item {
+    max-width: 360px;
+    margin: 0 12px;
+    transition: 0.5s;
+}
+
+.vesitable .vesitable-img {
+    height: 320px;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}
+
+.vesitable .vesitable-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.vesitable .vesitable-img img:hover {
+    transform: scale(1.2);
+}
+
+@media (max-width: 767px) {
+    .vesitable .vesitable-img { height: 220px; }
+    .vesitable .vesitable-item { max-width: 100%; margin: 0 6px; }
+}
 
