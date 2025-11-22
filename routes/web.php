@@ -2,21 +2,21 @@
 
 use App\Http\Controllers\AuthController;
 use GuzzleHttp\Middleware;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Passwo
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('auth');
+})->middleware('auth')->name('welcome');
 
 Route::get('/login', [AuthController::class, 'index'])
-->name('login')
-->middleware('guest');
+    ->name('login')
+    ->middleware('guest');
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])
-->name('logout')
-->Middleware('auth');
+    ->name('logout')
+    ->Middleware('auth');
 
 Route::get('/profile', function () {
     return view('auth.profile');
@@ -39,3 +39,11 @@ Route::post('/forgot-password', function (Illuminate\Http\Request $request) {
 Route::get('/reset-password/{token}', function ($token) {
     return view('auth.reset-password', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
+
+Route::get('/cart', function () {
+    return view('pages.cart');
+})->middleware('auth')->name('cart');
+
+Route::get('/orders', function () {
+    return view('pages.orders');
+})->middleware('auth')->name('orders');
