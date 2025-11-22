@@ -587,4 +587,16 @@
     .vesitable .vesitable-img { height: 220px; }
     .vesitable .vesitable-item { max-width: 100%; margin: 0 6px; }
 }
+.body{
+    padding-top: 160px; /* Sesuaikan dengan tinggi total header */
+    background-color: #f8f9fa;
+}
+
+.profile-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
 

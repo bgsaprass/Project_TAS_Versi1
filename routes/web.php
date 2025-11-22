@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use GuzzleHttp\Middleware;
-use Illuminate\Support\Facades\Passwo
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShopController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,3 +48,12 @@ Route::get('/cart', function () {
 Route::get('/orders', function () {
     return view('pages.orders');
 })->middleware('auth')->name('orders');
+
+Route::get('/shop', function () {
+    return view('pages.shop');
+})->middleware('auth')->name('shop');
+
+
+
+Route::get('/shop-detail/{id}', [ShopController::class, 'show'])->name('shop.detail');
+
