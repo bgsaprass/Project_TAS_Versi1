@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
@@ -10,6 +9,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Middleware\IsAdmin;
+
 
 Route::get('/', function () {
     $products = Product::all();
@@ -81,16 +82,16 @@ Route::get('/orders', function () {
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/product_detail/{id}', [ShopController::class, 'show'])->name('product_detail');
 
-Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
-Route::resource('products', ProductController::class);
-});
 
-Route::get('/admin', function () {
-return view('admin.dashboard');
-})->middleware(['auth', 'isAdmin'])->name('admin.index');
+Route::prefix('admin')->middleware(['auth', IsAdmin::class])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
+    Route::resource('products', ProductController::class);
+});
 
 Route::get(uri: 'checkout', action: function () {
 return view('pages.checkout');
 })->middleware('auth')->name('checkout');
 
-
+Route::get('/contact', function () {
+    return view('pages.contact');
+})->middleware('auth')->name('contact');

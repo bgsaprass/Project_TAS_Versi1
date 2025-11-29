@@ -97,7 +97,7 @@
                         <h5 class="mb-1">{{ Auth::user()->name }}</h5>
                         <p class="text-muted">{{ Auth::user()->email }}</p>
                         @if (Auth::user()->phone)
-                            <p class="text-muted">📞 {{ Auth::user()->phone }}</p>
+                            <p class="text-muted">{{ Auth::user()->phone }}</p>
                         @endif
                     </div>
 
