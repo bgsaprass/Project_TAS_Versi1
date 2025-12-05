@@ -9,32 +9,49 @@
     {{-- Navbar End --}}
 
     {{-- Orders Section --}}
-    <main class="container">
-        <div class="orders-card">
-            <h2 class="mb-4 text-center">Pesanan Saya</h2>
-            @php
-                $orders = auth()->user()->orders()->with('items')->orderBy('created_at', 'desc')->get();
-            @endphp
-
-            @if($orders->isEmpty())
-                <p class="text-center">Belum ada pesanan.</p>
-            @else
-                <div class="list-group">
-                    @foreach($orders as $order)
-                        <div class="list-group-item mb-3">
-                            <h5>Order #{{ $order->id }} - Rp{{ number_format($order->total) }}</h5>
-                            <p>Status: <strong>{{ $order->status }}</strong> | Pengiriman: <strong>{{ $order->shipping_status }}</strong></p>
-                            <ul>
-                                @foreach($order->items as $item)
-                                    <li>{{ $item->name }} x {{ $item->quantity }} - Rp{{ number_format($item->price) }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endforeach
+    <div class="container">
+        <h2>Pesanan Saya</h2>
+        @forelse($orders as $order)
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5>Pesanan #{{ $order->id }}</h5>
+                    <p>Tanggal: {{ $order->created_at->format('d M Y H:i') }}</p>
+                    <p>Total: Rp{{ number_format($order->total, 0, ',', '.') }}</p>
+                    <p>Status: {{ ucfirst($order->status) }} | Pengiriman: {{ ucfirst($order->shipping_status) }}</p>
+                    <a href="{{ route('orders.show', $order->id) }}" class="btn btn-sm btn-primary">Detail</a>
                 </div>
-            @endif
-        </div>
-    </main>
+            </div>
+        @empty
+            <p class="text-muted">Belum ada pesanan.</p>
+        @endforelse
+    </div>
+
+    <!-- Footer Start -->
+    @include('assets.footer')
+    <!-- Footer End -->
+    <!-- Copyright Start -->
+    @include('assets.copyright')
+    <!-- Copyright End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
+            class="fa fa-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    @include('assets.libraries')
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                confirmButtonColor: '#6f42c1',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
 </body>
 
 </html>
