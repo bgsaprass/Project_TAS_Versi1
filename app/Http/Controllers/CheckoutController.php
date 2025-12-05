@@ -16,11 +16,11 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-       $user = Auth::user();
+        $user = Auth::user();
 
-if (! $user) {
-    return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
-}
+        if (! $user) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
 
 
         // 1) Jika ada selected checkout di session (opsional, dari UI lama)
@@ -223,19 +223,32 @@ if (! $user) {
 
     public function checkoutSelected(Request $request)
     {
-        // Flow lama: memilih sebagian item dari session cart (opsional)
         $selectedIds = $request->input('selected', []);
-        $cart = session('cart', []);
+        $user = Auth::user();
+
+        if (empty($selectedIds)) {
+            return back()->with('error', 'Pilih minimal satu produk untuk checkout.');
+        }
+
+        $cart = Cart::firstOrCreate(['user_id' => $user->id]);
+        $items = $cart->items()->with('product')->get();
+
         $selectedItems = [];
 
-        foreach ($selectedIds as $id) {
-            if (isset($cart[$id])) {
-                $selectedItems[$id] = $cart[$id];
+        foreach ($items as $item) {
+            if (in_array($item->product_id, $selectedIds) && $item->product) {
+                $selectedItems[$item->product_id] = [
+                    'product_id' => $item->product_id,
+                    'name' => $item->product->name,
+                    'price' => $item->product->price,
+                    'quantity' => $item->quantity,
+                    'image' => $item->product->image ?? null,
+                ];
             }
         }
 
         if (empty($selectedItems)) {
-            return back()->with('error', 'Pilih minimal satu produk untuk checkout.');
+            return back()->with('error', 'Produk yang dipilih tidak ditemukan.');
         }
 
         session(['checkout_items' => $selectedItems]);

@@ -8,17 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('order_items')) {
-            Schema::create('order_items', function (Blueprint $table) {
-                $table->id();
-                $table->foreignId('order_id')->constrained()->onDelete('cascade');
-                $table->unsignedBigInteger('product_id')->nullable();
-                $table->string('name');
-                $table->decimal('price', 12, 2);
-                $table->integer('quantity');
-                $table->timestamps();
-            });
-        }
+        Schema::create('order_items', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->nullable()->constrained()->onDelete('set null');
+            $table->string('name'); // simpan nama produk saat checkout
+            $table->decimal('price', 12, 2); // simpan harga saat checkout
+            $table->integer('quantity');
+            $table->timestamps();
+        });
     }
 
     public function down(): void

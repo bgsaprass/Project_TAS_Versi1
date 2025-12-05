@@ -10,48 +10,56 @@ use App\Models\CartItem;
 
 class CartController extends Controller
 {
-    // Tampilkan isi keranjang (database-based)
+    /**
+     * Tampilkan isi keranjang
+     */
     public function index()
     {
-        $cart = Cart::firstOrCreate([
-            'user_id' => Auth::id(),
-        ]);
+        // Buat cart jika belum ada untuk user login
+        $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
 
+        // Ambil semua item beserta produk
         $items = $cart->items()->with('product')->get();
 
-        $subtotal = $items->sum(fn($item) => $item->product->price * $item->quantity);
+        // Hitung subtotal
+        $subtotal = $items->map(fn($item) => $item->product->price * $item->quantity)->sum();
 
         return view('pages.cart', compact('items', 'subtotal'));
     }
 
-    // Tambah produk ke keranjang (database-based)
+    /**
+     * Tambah produk ke keranjang
+     */
     public function add(Request $request, $productId)
     {
         $product = Product::findOrFail($productId);
 
-        if (!isset($product->stock) || $product->stock < 1) {
+        // Validasi stok
+        if ($product->stock < 1) {
             return back()->with('error', 'Stok produk habis.');
         }
 
-        $quantity = (int)$request->input('quantity', 1);
-        $quantity = min($quantity, $product->stock);
+        $quantity = min((int)$request->input('quantity', 1), $product->stock);
 
-        $cart = Cart::firstOrCreate([
-            'user_id' => Auth::id(),
-        ]);
+        $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
 
+        // Cari item di cart, kalau belum ada buat baru
         $item = $cart->items()->firstOrNew(['product_id' => $productId]);
-        $item->quantity = $item->exists ? $item->quantity + $quantity : $quantity;
+        $item->quantity = $item->exists
+            ? min($item->quantity + $quantity, $product->stock)
+            : $quantity;
         $item->save();
 
         return redirect()->route('cart.index')->with('success', 'Produk ditambahkan ke keranjang.');
     }
 
-    // Update jumlah produk (database-based)
+    /**
+     * Update jumlah produk di keranjang
+     */
     public function update(Request $request, $productId)
     {
         $cart = Auth::user()->cart;
-        $item = $cart->items()->where('product_id', $productId)->first();
+        $item = $cart?->items()->where('product_id', $productId)->first();
 
         if (!$item) {
             return back()->with('error', 'Produk tidak ditemukan di keranjang.');
@@ -62,7 +70,7 @@ class CartController extends Controller
         $newQuantity = (int)$request->input('quantity', $item->quantity);
 
         if ($action === 'increase') {
-            if ($product->stock > $item->quantity) {
+            if ($item->quantity < $product->stock) {
                 $item->quantity++;
             } else {
                 return back()->with('error', 'Stok tidak mencukupi.');
@@ -87,16 +95,41 @@ class CartController extends Controller
         return back()->with('success', 'Keranjang diperbarui.');
     }
 
-    // Hapus produk dari keranjang (database-based)
+    /**
+     * Hapus produk dari keranjang
+     */
     public function remove($productId)
     {
         $cart = Auth::user()->cart;
-        $item = $cart->items()->where('product_id', $productId)->first();
+        $item = $cart?->items()->where('product_id', $productId)->first();
 
         if ($item) {
             $item->delete();
         }
 
         return back()->with('success', 'Produk dihapus dari keranjang.');
+    }
+
+    public function checkout(Request $request)
+    {
+        $selectedIds = $request->input('selected_items', []);
+
+        if (empty($selectedIds)) {
+            return redirect()->route('cart.index')->with('error', 'Pilih minimal satu produk untuk checkout.');
+        }
+
+        $cart = Auth::user()->cart;
+        $items = $cart->items()->whereIn('product_id', $selectedIds)->with('product')->get();
+
+        if ($items->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Item yang dipilih tidak ditemukan.');
+        }
+
+        $subtotal = $items->map(fn($item) => $item->product->price * $item->quantity)->sum();
+        $ongkir = 10000;
+        $total = $subtotal + $ongkir;
+
+        // Simpan data checkout ke session atau lanjut ke halaman pembayaran
+        return view('pages.checkout', compact('items', 'subtotal', 'ongkir', 'total'));
     }
 }

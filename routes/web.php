@@ -99,15 +99,20 @@ Route::get('/profile', fn() => view('auth.profile'))->middleware('auth')->name('
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/shop/{id}', [ShopController::class, 'detail'])->name('shop.detail');
 Route::get('/product_detail/{id}', [ShopController::class, 'show'])->name('product.detail');
+Route::get('/shop/show/{id}', [ShopController::class, 'show'])->name('shop.show');
+
 
 // =======================
 // CART ROUTES
 // =======================
-
-Route::get('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart');
+Route::get('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart.index');
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->middleware('auth')->name('cart.add');
 Route::put('/cart/update/{id}', [CartController::class, 'update'])->middleware('auth')->name('cart.update');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->middleware('auth')->name('cart.remove');
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+Route::post('/cart/checkout-selected', [CheckoutController::class, 'checkoutSelected'])->name('checkout.selected');
+
+
 
 // =======================
 // CHECKOUT & PAYMENT ROUTES
@@ -142,7 +147,10 @@ Route::post('/address/store', [AddressController::class, 'store'])->middleware('
 
 Route::prefix('admin')->middleware(['auth', IsAdmin::class])->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('index');
-    Route::get('/users', [UsersController::class, 'index'])->name('users');
+    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}/edit', [UsersController::class, 'edit'])->name('users.edit');
+    Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
+
     Route::resource('products', ProductController::class);
     Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
     Route::post('/orders/{order}/update-shipping', [\App\Http\Controllers\Admin\OrderController::class, 'updateShipping'])->name('orders.updateShipping');
