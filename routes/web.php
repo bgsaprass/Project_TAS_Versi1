@@ -16,6 +16,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
 
 // =======================
 // PUBLIC ROUTES
@@ -101,18 +102,15 @@ Route::get('/shop/{id}', [ShopController::class, 'detail'])->name('shop.detail')
 Route::get('/product_detail/{id}', [ShopController::class, 'show'])->name('product.detail');
 Route::get('/shop/show/{id}', [ShopController::class, 'show'])->name('shop.show');
 
-
 // =======================
 // CART ROUTES
 // =======================
+
 Route::get('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart.index');
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->middleware('auth')->name('cart.add');
 Route::put('/cart/update/{id}', [CartController::class, 'update'])->middleware('auth')->name('cart.update');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->middleware('auth')->name('cart.remove');
-Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-Route::post('/cart/checkout-selected', [CheckoutController::class, 'checkoutSelected'])->name('checkout.selected');
-
-
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->middleware('auth')->name('cart.checkout');
 
 // =======================
 // CHECKOUT & PAYMENT ROUTES
@@ -122,16 +120,19 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('auth'
 Route::post('/checkout-selected', [CheckoutController::class, 'checkoutSelected'])->middleware('auth')->name('checkout.selected');
 Route::post('/checkout/direct/{id}', [CheckoutController::class, 'direct'])->middleware('auth')->name('checkout.direct');
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->middleware('auth')->name('checkout.process');
+Route::post('/checkout/finalize', [CheckoutController::class, 'finalize'])->middleware('auth')->name('checkout.finalize');
 
-Route::get('/payment/bank', fn() => view('pages.payments.bank'))->name('payment.bank');
-Route::get('/payment/cod', fn() => view('pages.payments.cod'))->name('payment.cod');
-Route::get('/payment/ewallet', fn() => view('pages.payments.ewallet'))->name('payment.ewallet');
+// Halaman metode pembayaran
+Route::get('/checkout/bank', [CheckoutController::class, 'bankTransfer'])->middleware('auth')->name('checkout.bank');
+Route::get('/checkout/cod', [CheckoutController::class, 'cod'])->middleware('auth')->name('checkout.cod');
+Route::get('/checkout/ewallet', [CheckoutController::class, 'eWallet'])->middleware('auth')->name('checkout.ewallet');
 
 // =======================
 // ORDERS & CONTACT ROUTES
 // =======================
 
 Route::get('/orders', [OrderController::class, 'index'])->middleware('auth')->name('orders');
+Route::get('/orders/{id}', [OrderController::class, 'show'])->middleware('auth')->name('orders.show');
 Route::get('/contact', fn() => view('pages.contact'))->name('contact');
 
 // =======================
@@ -150,8 +151,10 @@ Route::prefix('admin')->middleware(['auth', IsAdmin::class])->name('admin.')->gr
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
     Route::get('/users/{user}/edit', [UsersController::class, 'edit'])->name('users.edit');
     Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
-
     Route::resource('products', ProductController::class);
     Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
     Route::post('/orders/{order}/update-shipping', [\App\Http\Controllers\Admin\OrderController::class, 'updateShipping'])->name('orders.updateShipping');
 });
+
+

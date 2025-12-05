@@ -3,26 +3,43 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Order;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    /**
+     * Menampilkan semua pesanan (admin)
+     */
     public function index()
     {
-        $orders = Order::with('user')->orderBy('created_at', 'desc')->paginate(20);
+        $orders = Order::with(['user', 'items.product'])
+            ->latest()
+            ->get();
+
         return view('admin.orders.index', compact('orders'));
     }
 
+    /**
+     * Update status pengiriman pesanan
+     */
     public function updateShipping(Request $request, Order $order)
     {
         $request->validate([
-            'shipping_status' => 'required|string',
+            'shipping_status' => 'required|in:pending,processing,shipped,delivered',
         ]);
 
-        $order->shipping_status = $request->shipping_status;
-        $order->save();
+        $order->update(['shipping_status' => $request->shipping_status]);
 
-        return redirect()->back()->with('success', 'Status pengiriman berhasil diperbarui.');
+        return back()->with('success', 'Status pengiriman diperbarui.');
+    }
+
+    /**
+     * Detail pesanan (admin)
+     */
+    public function show(Order $order)
+    {
+        $order->load(['user', 'items.product']);
+        return view('admin.orders.show', compact('order'));
     }
 }
