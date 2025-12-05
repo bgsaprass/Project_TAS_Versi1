@@ -54,11 +54,19 @@
                             @if (Auth::user()->role === 'admin')
                                 <a href="{{ route('admin.index') }}" class="btn btn-outline-dark me-2">Admin Dashboard</a>
                             @else
-                                <a href="{{ route('cart') }}" class="position-relative me-4 my-auto">
+                                <a href="{{ route('cart.index') }}" class="position-relative me-4 my-auto">
                                     <i class="fa fa-shopping-bag fa-2x"></i>
+                                    @php
+                                        $cartCount =
+                                            Auth::check() && Auth::user()->cart
+                                                ? Auth::user()->cart->items()->count()
+                                                : 0;
+                                    @endphp
                                     <span
                                         class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                                        style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                                        style="top: -5px; left: 15px; height: 20px; min-width: 20px;">
+                                        {{ $cartCount }}
+                                    </span>
                                 </a>
                             @endif
 

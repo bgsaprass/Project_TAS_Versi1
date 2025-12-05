@@ -46,22 +46,20 @@
             <form method="POST" action="{{ route('checkout.process') }}">
                 @csrf
                 <div class="row g-5">
-                    {{-- Form Billing --}}
+                    {{-- Pilih Alamat --}}
                     <label for="address_id">Pilih Alamat:</label>
-                    <select name="address_id" id="address_id" class="form-select">
+                    <select name="address_id" id="address_id" class="form-select" required>
                         @foreach (auth()->user()->addresses as $address)
                             <option value="{{ $address->id }}">
                                 {{ $address->recipient_name }} - {{ $address->address }}, {{ $address->city }}
                             </option>
                         @endforeach
                     </select>
-
                     <a href="{{ route('address.create') }}" class="btn btn-sm btn-outline-primary mt-2">+ Tambah Alamat
                         Baru</a>
 
-
                     {{-- Ringkasan Order --}}
-                    <div class="col-md-12 col-lg-6 col-xl-5">
+                    <div class="col-md-12 col-lg-6 col-xl-5 mt-4">
                         <div class="table-responsive mb-4">
                             <table class="table">
                                 <thead>
@@ -75,24 +73,64 @@
                                 </thead>
                                 <tbody>
                                     @php $subtotal = 0; @endphp
-                                    @foreach ($cart ?? [$product->id => $product] as $id => $item)
+
+                                    {{-- Jika checkout dari keranjang --}}
+                                    @if (isset($cart) && !empty($cart))
+                                        @foreach ($cart as $id => $item)
+                                            @php
+                                                $qty = $item['quantity'] ?? 1;
+                                                $price = $item['price'] ?? 0;
+                                                $name = $item['name'] ?? '';
+                                                $image = $item['image'] ?? null;
+                                                $total = $price * $qty;
+                                                $subtotal += $total;
+                                            @endphp
+                                            <tr>
+                                                <td>
+                                                    @if ($image)
+                                                        <img src="{{ asset('img/' . $image) }}"
+                                                            class="img-fluid rounded-circle"
+                                                            style="width: 80px; height: 80px;">
+                                                    @endif
+                                                </td>
+                                                <td>{{ $name }}</td>
+                                                <td>Rp{{ number_format($price) }}</td>
+                                                <td>{{ $qty }}</td>
+                                                <td>Rp{{ number_format($total) }}</td>
+                                            </tr>
+                                        @endforeach
+
+                                        {{-- Jika direct checkout --}}
+                                    @elseif(isset($product))
                                         @php
-                                            $qty = $item['quantity'] ?? ($quantity ?? 1);
-                                            $price = $item['price'] ?? $item->price;
-                                            $name = $item['name'] ?? $item->name;
-                                            $image = $item['image'] ?? $item->image;
+                                            $qty = $quantity ?? 1;
+                                            $price = $product->price ?? 0;
+                                            $name = $product->name ?? '';
+                                            $image = $product->image ?? null;
                                             $total = $price * $qty;
                                             $subtotal += $total;
                                         @endphp
                                         <tr>
-                                            <td><img src="{{ asset('img/' . $image) }}" class="img-fluid rounded-circle"
-                                                    style="width: 80px; height: 80px;"></td>
+                                            <td>
+                                                @if ($image)
+                                                    <img src="{{ asset('img/' . $image) }}"
+                                                        class="img-fluid rounded-circle"
+                                                        style="width: 80px; height: 80px;">
+                                                @endif
+                                            </td>
                                             <td>{{ $name }}</td>
                                             <td>Rp{{ number_format($price) }}</td>
                                             <td>{{ $qty }}</td>
                                             <td>Rp{{ number_format($total) }}</td>
                                         </tr>
-                                    @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted">Tidak ada item untuk
+                                                checkout.</td>
+                                        </tr>
+                                    @endif
+
+                                    {{-- Ringkasan --}}
                                     <tr>
                                         <td colspan="4" class="text-end fw-bold">Subtotal</td>
                                         <td>Rp{{ number_format($subtotal) }}</td>
@@ -133,6 +171,7 @@
             </form>
         </div>
     </div>
+
 
 
     <!-- Script Dinamis untuk Ringkasan & Input -->
