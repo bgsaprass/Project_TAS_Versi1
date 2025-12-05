@@ -28,8 +28,8 @@
                         </div>
                         <div class="col-lg-6">
                             <h4 class="fw-bold mb-3">{{ $product->name }}</h4>
-                            <p class="mb-3">Category: {{ $product->category }}</p>
-                            <h5 class="fw-bold mb-3">${{ $product->price }}</h5>
+                            <p><strong>Kategori:</strong> {{ optional($product->category)->name ?? 'Tanpa Kategori' }}</p>
+                            <h5 class="fw-bold mb-3">Rp{{ number_format($product->price) }}</h5>
                             <div class="d-flex mb-4">
                                 @for ($i = 0; $i < 4; $i++)
                                     <i class="fa fa-star text-secondary"></i>
@@ -37,18 +37,51 @@
                                 <i class="fa fa-star"></i>
                             </div>
                             <p class="mb-4">{{ $product->description }}</p>
-                            <div class="input-group quantity mb-5" style="width: 100px;">
+
+                            <!-- Quantity Control -->
+                            <div class="input-group quantity mb-4" style="width: 120px;">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border"><i class="fa fa-minus"></i></button>
+                                    <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
                                 </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                                <input type="number"
+                                       id="quantity"
+                                       name="quantity"
+                                       class="form-control form-control-sm text-center border-0"
+                                       value="1"
+                                       min="1"
+                                       max="{{ $product->stock }}">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border"><i class="fa fa-plus"></i></button>
+                                    <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+
+                            <!-- Action Buttons -->
+                            <a href="{{ route('cart.add', ['id' => $product->id]) }}"
+                               onclick="event.preventDefault(); submitCart();"
+                               class="btn border border-secondary rounded-pill px-4 py-2 mb-2 text-primary">
                                 <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
                             </a>
+
+                            <a href="{{ route('checkout.direct', ['id' => $product->id]) }}"
+                               onclick="event.preventDefault(); submitBuy();"
+                               class="btn border border-primary rounded-pill px-4 py-2 mb-2 text-primary">
+                                <i class="fa fa-credit-card me-2 text-primary"></i> Beli Sekarang
+                            </a>
+
+                            <!-- Hidden Forms -->
+                            <form id="cartForm" method="POST" action="{{ route('cart.add', ['id' => $product->id]) }}">
+                                @csrf
+                                <input type="hidden" name="quantity" id="cartQuantity">
+                            </form>
+
+                            <form id="buyForm" method="POST" action="{{ route('checkout.direct', ['id' => $product->id]) }}">
+                                @csrf
+                                <input type="hidden" name="quantity" id="buyQuantity">
+                            </form>
                         </div>
 
                         <!-- Tabs -->
@@ -108,12 +141,36 @@
 
                 <!-- Sidebar -->
                 <div class="col-lg-4 col-xl-3">
-                    @include('assets.sidebar') {{-- Optional: if you modularize sidebar --}}
+                    @include('assets.sidebar')
                 </div>
             </div>
         </div>
     </div>
 
-    @include('assets.footer')
+    <!-- Quantity Script -->
+    <script>
+        const quantityInput = document.getElementById('quantity');
+        const maxStock = parseInt(quantityInput.max);
+
+        document.querySelector('.btn-plus').addEventListener('click', () => {
+            let val = parseInt(quantityInput.value);
+            if (val < maxStock) quantityInput.value = val + 1;
+        });
+
+        document.querySelector('.btn-minus').addEventListener('click', () => {
+            let val = parseInt(quantityInput.value);
+            if (val > 1) quantityInput.value = val - 1;
+        });
+
+        function submitCart() {
+            document.getElementById('cartQuantity').value = quantityInput.value;
+            document.getElementById('cartForm').submit();
+        }
+
+        function submitBuy() {
+            document.getElementById('buyQuantity').value = quantityInput.value;
+            document.getElementById('buyForm').submit();
+        }
+    </script>
 </body>
 </html>

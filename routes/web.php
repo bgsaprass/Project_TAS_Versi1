@@ -1,30 +1,65 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Models\Product;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\OrderController;
 
+// =======================
+// PUBLIC ROUTES
+// =======================
 
-Route::get('/', function () {
-    $products = Product::all();
-    return view('welcome', compact('products'));
-})->middleware('auth')->name('welcome');
+Route::get('/', function (Request $request) {
+    $categories = Category::withCount('products')->get();
 
-Route::get('/login', [AuthController::class, 'index'])
-    ->name('login')
-    ->middleware('guest');
+    $productsQuery = Product::query();
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->middleware('guest')->name('register');
+    if ($request->filled('category') && Category::find($request->category)) {
+        $productsQuery->where('category_id', $request->category);
+    }
 
+    if ($request->filled('search')) {
+        $productsQuery->where('name', 'like', '%' . $request->search . '%');
+    }
+
+    if ($request->sort === 'price_asc') {
+        $productsQuery->orderBy('price', 'asc');
+    } elseif ($request->sort === 'price_desc') {
+        $productsQuery->orderBy('price', 'desc');
+    }
+
+    $products = $productsQuery->get();
+
+    return view('welcome', [
+        'products' => $products,
+        'categories' => $categories,
+        'selectedCategory' => $request->category,
+        'sort' => $request->sort,
+        'search' => $request->search,
+    ]);
+})->name('welcome');
+
+// =======================
+// AUTH ROUTES
+// =======================
+
+Route::get('/login', [AuthController::class, 'index'])->middleware('guest')->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::get('/register', fn() => view('auth.register'))->middleware('guest')->name('register');
 Route::post('/register', function (Request $request) {
     $data = $request->validate([
         'name' => 'required|string|max:255',
@@ -42,22 +77,9 @@ Route::post('/register', function (Request $request) {
     return redirect()->route('login')->with('status', 'Account created. Please login.');
 })->middleware('guest');
 
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->name('logout')
-    ->Middleware('auth');
-
-Route::get('/profile', function () {
-    return view('auth.profile');
-})->middleware('auth')->name('profile');
-
-Route::get('/forgot-password', function () {
-    return view('auth.forgot-password');
-})->middleware('guest')->name('password.request');
-
-Route::post('/forgot-password', function (Illuminate\Http\Request $request) {
+Route::get('/forgot-password', fn() => view('auth.forgot-password'))->middleware('guest')->name('password.request');
+Route::post('/forgot-password', function (Request $request) {
     $request->validate(['email' => 'required|email']);
-
     $status = Password::sendResetLink($request->only('email'));
 
     return $status === Password::RESET_LINK_SENT
@@ -65,33 +87,63 @@ Route::post('/forgot-password', function (Illuminate\Http\Request $request) {
         : back()->withErrors(['email' => __($status)]);
 })->middleware('guest')->name('password.email');
 
-Route::get('/reset-password/{token}', function ($token) {
-    return view('auth.reset-password', ['token' => $token]);
-})->middleware('guest')->name('password.reset');
+Route::get('/reset-password/{token}', fn($token) => view('auth.reset-password', ['token' => $token]))
+    ->middleware('guest')->name('password.reset');
 
-Route::get('/cart', function () {
-    return view('pages.cart');
-})->middleware('auth')->name('cart');
+Route::get('/profile', fn() => view('auth.profile'))->middleware('auth')->name('profile');
 
-Route::get('/orders', function () {
-    return view('pages.orders');
-})->middleware('auth')->name('orders');
-
-
+// =======================
+// SHOP ROUTES
+// =======================
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
-Route::get('/product_detail/{id}', [ShopController::class, 'show'])->name('product_detail');
+Route::get('/shop/{id}', [ShopController::class, 'detail'])->name('shop.detail');
+Route::get('/product_detail/{id}', [ShopController::class, 'show'])->name('product.detail');
 
+// =======================
+// CART ROUTES
+// =======================
 
-Route::prefix('admin')->middleware(['auth', IsAdmin::class])->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
+Route::get('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->middleware('auth')->name('cart.add');
+Route::put('/cart/update/{id}', [CartController::class, 'update'])->middleware('auth')->name('cart.update');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->middleware('auth')->name('cart.remove');
+
+// =======================
+// CHECKOUT & PAYMENT ROUTES
+// =======================
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('auth')->name('checkout');
+Route::post('/checkout-selected', [CheckoutController::class, 'checkoutSelected'])->middleware('auth')->name('checkout.selected');
+Route::post('/checkout/direct/{id}', [CheckoutController::class, 'direct'])->middleware('auth')->name('checkout.direct');
+Route::post('/checkout/process', [CheckoutController::class, 'process'])->middleware('auth')->name('checkout.process');
+
+Route::get('/payment/bank', fn() => view('pages.payments.bank'))->name('payment.bank');
+Route::get('/payment/cod', fn() => view('pages.payments.cod'))->name('payment.cod');
+Route::get('/payment/ewallet', fn() => view('pages.payments.ewallet'))->name('payment.ewallet');
+
+// =======================
+// ORDERS & CONTACT ROUTES
+// =======================
+
+Route::get('/orders', [OrderController::class, 'index'])->middleware('auth')->name('orders');
+Route::get('/contact', fn() => view('pages.contact'))->name('contact');
+
+// =======================
+// ADDRESS ROUTES
+// =======================
+
+Route::get('/address/create', [AddressController::class, 'create'])->middleware('auth')->name('address.create');
+Route::post('/address/store', [AddressController::class, 'store'])->middleware('auth')->name('address.store');
+
+// =======================
+// ADMIN ROUTES
+// =======================
+
+Route::prefix('admin')->middleware(['auth', IsAdmin::class])->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('index');
+    Route::get('/users', [UsersController::class, 'index'])->name('users');
     Route::resource('products', ProductController::class);
+    Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
+    Route::post('/orders/{order}/update-shipping', [\App\Http\Controllers\Admin\OrderController::class, 'updateShipping'])->name('orders.updateShipping');
 });
-
-Route::get(uri: 'checkout', action: function () {
-return view('pages.checkout');
-})->middleware('auth')->name('checkout');
-
-Route::get('/contact', function () {
-    return view('pages.contact');
-})->middleware('auth')->name('contact');

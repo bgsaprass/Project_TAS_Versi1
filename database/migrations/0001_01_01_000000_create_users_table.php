@@ -29,7 +29,7 @@ return new class extends Migration
         DB::table('users')->insert([
             'name' => 'admin1',
             'email' => 'adminsupermarket1@gmail.com',
-            'password'=> bcrypt('admin_supermarket@123'),
+            'password'=> bcrypt('123'),
         ]);
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

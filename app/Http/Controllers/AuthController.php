@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
 
 class AuthController extends Controller
 {
@@ -23,6 +24,23 @@ class AuthController extends Controller
         // Coba autentikasi
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+            // Restore cart from DB if exists
+            try {
+                $cart = \App\Models\Cart::where('user_id', Auth::id())->first();
+                if ($cart && is_array($cart->data)) {
+                    // merge DB cart into session cart
+                    $sessionCart = session('cart', []);
+                    $merged = array_replace_recursive($sessionCart, $cart->data ?: []);
+                    session(['cart' => $merged]);
+                }
+            } catch (\Exception $e) {
+                // ignore
+            }
+
+            // ensure cart row exists
+            \App\Models\Cart::firstOrCreate(['user_id' => Auth::id()]);
+
             return redirect()->intended('/');
         }
 
@@ -34,6 +52,19 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        // Before logout, persist session cart to DB so it survives logout
+        try {
+            if (Auth::check()) {
+                $cartData = session('cart', []);
+                \App\Models\Cart::updateOrCreate(
+                    ['user_id' => Auth::id()],
+                    ['data' => $cartData]
+                );
+            }
+        } catch (\Exception $e) {
+            // ignore
+        }
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

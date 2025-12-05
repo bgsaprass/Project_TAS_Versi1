@@ -109,7 +109,7 @@
                     </div>
 
                     <div class="d-grid gap-2">
-                        <a href="#" class="btn btn-outline-success">
+                        <a href="{{ route('orders') }}" class="btn btn-outline-success">
                             <i class="fa fa-box me-2"></i> Lihat Pesanan Saya
                         </a>
 
