@@ -6,24 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         if (!Schema::hasTable('carts')) {
             Schema::create('carts', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
+                $table->foreignId('user_id')->constrained()->onDelete('cascade');
                 $table->json('data')->nullable();
                 $table->timestamps();
             });
         }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('carts');
