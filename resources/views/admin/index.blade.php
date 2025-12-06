@@ -8,359 +8,236 @@
 
     <div class="flex overflow-hidden bg-white pt-16">
 
-        <aside id="sidebar"
-            class="fixed hidden z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75"
-            aria-label="Sidebar">
-            <div class="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0">
-                <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-                    <div class="flex-1 px-3 bg-white divide-y space-y-1">
-                        <ul class="space-y-2 pb-2">
-                            <li>
-                                <form action="#" method="GET" class="lg:hidden">
-                                    <label for="mobile-search" class="sr-only">Search</label>
-                                    <div class="relative">
-                                        <div
-                                            class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                        <input type="text" name="email" id="mobile-search"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-600 focus:ring-cyan-600 block w-full pl-10 p-2.5"
-                                            placeholder="Search">
-                                    </div>
-                                </form>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.index') }}"
-                                    class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
-                                    <svg class="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75"
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                                    </svg>
-                                    <span class="ml-3">Dashboard</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.users.index') }}"
-                                    class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
-                                    <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd">
-                                        </path>
-                                    </svg>
-                                    <span class="ml-3 flex-1 whitespace-nowrap">Pengguna</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.products.index') }}"
-                                    class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
-                                    <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span class="ml-3 flex-1 whitespace-nowrap">Produk</span>
-                                </a>
-                            </li>
-                        </ul>
-                        {{-- <div class="space-y-2 pt-2">
-                            <a href="#windster/pricing/"
-                                class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2">
-                                <svg class="w-5 h-5 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
-                                    aria-hidden="true" focusable="false" data-prefix="fas" data-icon="gem"
-                                    role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path fill="currentColor"
-                                        d="M378.7 32H133.3L256 182.7L378.7 32zM512 192l-107.4-141.3L289.6 192H512zM107.4 50.67L0 192h222.4L107.4 50.67zM244.3 474.9C247.3 478.2 251.6 480 256 480s8.653-1.828 11.67-5.062L510.6 224H1.365L244.3 474.9z">
-                                    </path>
-                                </svg>
-                                <span class="ml-4">Upgrade to Pro</span>
-                            </a>
-                            <a href="https://flowbite.com/docs/getting-started/introduction/" target="_blank"
-                                class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2">
-                                <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
-                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                                    <path fill-rule="evenodd"
-                                        d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="ml-3">Documentation</span>
-                            </a>
-                            <a href="https://flowbite.com/docs/components/accordion/" target="_blank"
-                                class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2">
-                                <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
-                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z">
-                                    </path>
-                                </svg>
-                                <span class="ml-3">Components</span>
-                            </a>
-                            <a href="#!"
-                                class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2">
-                                <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
-                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-2 0c0 .993-.241 1.929-.668 2.754l-1.524-1.525a3.997 3.997 0 00.078-2.183l1.562-1.562C15.802 8.249 16 9.1 16 10zm-5.165 3.913l1.58 1.58A5.98 5.98 0 0110 16a5.976 5.976 0 01-2.516-.552l1.562-1.562a4.006 4.006 0 001.789.027zm-4.677-2.796a4.002 4.002 0 01-.041-2.08l-.08.08-1.53-1.533A5.98 5.98 0 004 10c0 .954.223 1.856.619 2.657l1.54-1.54zm1.088-6.45A5.974 5.974 0 0110 4c.954 0 1.856.223 2.657.619l-1.54 1.54a4.002 4.002 0 00-2.346.033L7.246 4.668zM12 10a2 2 0 11-4 0 2 2 0 014 0z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="ml-3">Help</span>
-                            </a>
-                        </div> --}}
-                    </div>
-                </div>
-            </div>
-        </aside>
+        @include('assets.aside-das')
 
         <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
 
 
         <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
             <main>
-
                 <div class="pt-6 px-4">
+                    {{-- Top area: Sales + chart + latest transactions --}}
                     <div class="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
-                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
-
+                        {{-- Sales summary + weekly chart --}}
+                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 2xl:col-span-2">
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex-shrink-0">
-                                    <span
-                                        class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">$45,385</span>
-                                    <h3 class="text-base font-normal text-gray-500">Sales this week</h3>
+                                    <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                                        Rp{{ number_format($totalRevenueThisWeek, 0, ',', '.') }}
+                                    </span>
+                                    <h3 class="text-base font-normal text-gray-500">Penjualan minggu ini</h3>
                                 </div>
-                                <div class="flex items-center justify-end flex-1 text-green-500 text-base font-bold">
-                                    12.5%
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
-                                            clip-rule="evenodd"></path>
+                                <div
+                                    class="flex items-center justify-end flex-1
+                        {{ $revenueGrowthPercent >= 0 ? 'text-green-500' : 'text-red-500' }}
+                        text-base font-bold">
+                                    {{ $revenueGrowthPercent >= 0 ? $revenueGrowthPercent . '%' : $revenueGrowthPercent . '%' }}
+                                    <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                        @if ($revenueGrowthPercent >= 0)
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        @else
+                                            <path fill-rule="evenodd"
+                                                d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        @endif
                                     </svg>
                                 </div>
                             </div>
-                            <div id="main-chart"></div>
 
+                            <div class="relative">
+                                <canvas id="weeklySalesChart" class="w-full h-64"></canvas>
+                            </div>
                         </div>
 
-                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-
-                            <!-- Card Title -->
+                        {{-- Latest transactions --}}
+                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
                             <div class="mb-4 flex items-center justify-between">
                                 <div>
-                                    <h3 class="text-xl font-bold text-gray-900 mb-2">Latest Transactions</h3>
-                                    <span class="text-base font-normal text-gray-500">This is a list of latest
-                                        transactions</span>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">Transaksi Terbaru</h3>
+                                    <span class="text-base font-normal text-gray-500">Daftar transaksi terbaru</span>
                                 </div>
                                 <div class="flex-shrink-0">
-                                    <a href="#"
-                                        class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">View
-                                        all</a>
+                                    <a href="{{ route('admin.orders.index') }}"
+                                        class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">
+                                        Lihat semua
+                                    </a>
                                 </div>
                             </div>
-                        </div>
 
+                            <div class="flow-root">
+                                <ul role="list" class="divide-y divide-gray-200">
+                                    @forelse($latestTransactions as $trx)
+                                        <li class="py-3 sm:py-4">
+                                            <div class="flex items-center justify-between">
+                                                <div class="min-w-0">
+                                                    <p class="text-sm font-medium text-gray-900 truncate">
+                                                        #{{ $trx->id }} • {{ $trx->user?->name ?? 'Guest' }}
+                                                    </p>
+                                                    <p class="text-sm text-gray-500 truncate">
+                                                        {{ $trx->created_at->format('d M Y H:i') }}
+                                                    </p>
+                                                </div>
+                                                <div class="text-right">
+                                                    <p
+                                                        class="inline-block px-2 py-1 rounded-full text-xs font-semibold
+                                            {{ $trx->status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+                                                        {{ ucfirst($trx->status) }}
+                                                    </p>
+                                                    <p class="text-base font-semibold text-gray-900">
+                                                        Rp{{ number_format($trx->total, 0, ',', '.') }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @empty
+                                        <li class="py-3 sm:py-4">
+                                            <p class="text-sm text-gray-500">Belum ada transaksi terbaru.</p>
+                                        </li>
+                                    @endforelse
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
+                    {{-- Middle metrics --}}
                     <div class="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-
+                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">
-                                    <span
-                                        class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">2,340</span>
-                                    <h3 class="text-base font-normal text-gray-500">New products this week</h3>
+                                    <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                                        {{ number_format($newProductsCount, 0, ',', '.') }}
+                                    </span>
+                                    <h3 class="text-base font-normal text-gray-500">Produk baru minggu ini</h3>
                                 </div>
                                 <div
-                                    class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold">
-                                    14.6%
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
-                                            clip-rule="evenodd"></path>
+                                    class="ml-5 w-0 flex items-center justify-end flex-1
+                        {{ $newProductsGrowth >= 0 ? 'text-green-500' : 'text-red-500' }}
+                        text-base font-bold">
+                                    {{ $newProductsGrowth }}%
+                                    <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                        @if ($newProductsGrowth >= 0)
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        @else
+                                            <path fill-rule="evenodd"
+                                                d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        @endif
                                     </svg>
                                 </div>
                             </div>
-
                         </div>
 
-
-                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-
+                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">
-                                    <span
-                                        class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">5,355</span>
-                                    <h3 class="text-base font-normal text-gray-500">Visitors this week</h3>
+                                    <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                                        {{ number_format($visitorsThisWeek, 0, ',', '.') }}
+                                    </span>
+                                    <h3 class="text-base font-normal text-gray-500">Pengunjung minggu ini</h3>
                                 </div>
                                 <div
-                                    class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold">
-                                    32.9%
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
-                                            clip-rule="evenodd"></path>
+                                    class="ml-5 w-0 flex items-center justify-end flex-1
+                        {{ $visitorsGrowth >= 0 ? 'text-green-500' : 'text-red-500' }}
+                        text-base font-bold">
+                                    {{ $visitorsGrowth }}%
+                                    <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                        @if ($visitorsGrowth >= 0)
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        @else
+                                            <path fill-rule="evenodd"
+                                                d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        @endif
                                     </svg>
                                 </div>
                             </div>
-
                         </div>
 
-
-                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-
+                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">
-                                    <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">385</span>
-                                    <h3 class="text-base font-normal text-gray-500">User signups this week</h3>
+                                    <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                                        {{ number_format($userSignupsThisWeek, 0, ',', '.') }}
+                                    </span>
+                                    <h3 class="text-base font-normal text-gray-500">User baru minggu ini</h3>
                                 </div>
                                 <div
-                                    class="ml-5 w-0 flex items-center justify-end flex-1 text-red-500 text-base font-bold">
-                                    -2.7%
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd"></path>
+                                    class="ml-5 w-0 flex items-center justify-end flex-1
+                        {{ $userSignupsGrowth >= 0 ? 'text-green-500' : 'text-red-500' }}
+                        text-base font-bold">
+                                    {{ $userSignupsGrowth }}%
+                                    <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                        @if ($userSignupsGrowth >= 0)
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        @else
+                                            <path fill-rule="evenodd"
+                                                d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        @endif
                                     </svg>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
+
+                    {{-- Bottom area: latest customers + acquisition overview --}}
                     <div class="grid grid-cols-1 2xl:grid-cols-2 xl:gap-4 my-4">
-                        <!-- Top Sales Card -->
+                        {{-- Latest Customers from paid orders --}}
                         <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-xl font-bold leading-none text-gray-900">Latest Customers</h3>
-                                <a href="#"
+                                <h3 class="text-xl font-bold leading-none text-gray-900">Pelanggan Terakhir</h3>
+                                <a href="{{ route('admin.users.index') }}"
                                     class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2">
-                                    View all
+                                    Lihat semua
                                 </a>
                             </div>
                             <div class="flow-root">
                                 <ul role="list" class="divide-y divide-gray-200">
-                                    <li class="py-3 sm:py-4">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="flex-shrink-0">
-                                                <img class="h-8 w-8 rounded-full"
-                                                    src="#windster/images/users/neil-sims.png"
-                                                    alt="Neil image">
+                                    @forelse($latestCustomers as $cust)
+                                        <li class="py-3 sm:py-4">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="flex-shrink-0">
+                                                    <div
+                                                        class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center">
+                                                        <span class="text-indigo-700 text-xs font-semibold">
+                                                            {{ strtoupper(substr($cust->name, 0, 1)) }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-sm font-medium text-gray-900 truncate">
+                                                        {{ $cust->name }}
+                                                    </p>
+                                                    <p class="text-sm text-gray-500 truncate">
+                                                        {{ $cust->email }}
+                                                    </p>
+                                                </div>
+                                                <div
+                                                    class="inline-flex items-center text-base font-semibold text-gray-900">
+                                                    Rp{{ number_format($cust->last_total ?? 0, 0, ',', '.') }}
+                                                </div>
                                             </div>
-                                            <div class="flex-1 min-w-0">
-                                                <p class="text-sm font-medium text-gray-900 truncate">
-                                                    Neil Sims
-                                                </p>
-                                                <p class="text-sm text-gray-500 truncate">
-                                                    email@windster.com
-                                                </p>
-                                            </div>
-                                            <div
-                                                class="inline-flex items-center text-base font-semibold text-gray-900">
-                                                $320
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="py-3 sm:py-4">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="flex-shrink-0">
-                                                <img class="h-8 w-8 rounded-full"
-                                                    src="#windster/images/users/bonnie-green.png"
-                                                    alt="Neil image">
-                                            </div>
-                                            <div class="flex-1 min-w-0">
-                                                <p class="text-sm font-medium text-gray-900 truncate">
-                                                    Bonnie Green
-                                                </p>
-                                                <p class="text-sm text-gray-500 truncate">
-                                                    email@windster.com
-                                                </p>
-                                            </div>
-                                            <div
-                                                class="inline-flex items-center text-base font-semibold text-gray-900">
-                                                $3467
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="py-3 sm:py-4">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="flex-shrink-0">
-                                                <img class="h-8 w-8 rounded-full"
-                                                    src="#windster/images/users/michael-gough.png"
-                                                    alt="Neil image">
-                                            </div>
-                                            <div class="flex-1 min-w-0">
-                                                <p class="text-sm font-medium text-gray-900 truncate">
-                                                    Michael Gough
-                                                </p>
-                                                <p class="text-sm text-gray-500 truncate">
-                                                    email@windster.com
-                                                </p>
-                                            </div>
-                                            <div
-                                                class="inline-flex items-center text-base font-semibold text-gray-900">
-                                                $67
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="py-3 sm:py-4">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="flex-shrink-0">
-                                                <img class="h-8 w-8 rounded-full"
-                                                    src="#windster/images/users/thomas-lean.png"
-                                                    alt="Neil image">
-                                            </div>
-                                            <div class="flex-1 min-w-0">
-                                                <p class="text-sm font-medium text-gray-900 truncate">
-                                                    Thomes Lean
-                                                </p>
-                                                <p class="text-sm text-gray-500 truncate">
-                                                    email@windster.com
-                                                </p>
-                                            </div>
-                                            <div
-                                                class="inline-flex items-center text-base font-semibold text-gray-900">
-                                                $2367
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="pt-3 sm:pt-4 pb-0">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="flex-shrink-0">
-                                                <img class="h-8 w-8 rounded-full"
-                                                    src="#windster/images/users/lana-byrd.png"
-                                                    alt="Neil image">
-                                            </div>
-                                            <div class="flex-1 min-w-0">
-                                                <p class="text-sm font-medium text-gray-900 truncate">
-                                                    Lana Byrd
-                                                </p>
-                                                <p class="text-sm text-gray-500 truncate">
-                                                    email@windster.com
-                                                </p>
-                                            </div>
-                                            <div
-                                                class="inline-flex items-center text-base font-semibold text-gray-900">
-                                                $367
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    @empty
+                                        <li class="py-3 sm:py-4">
+                                            <p class="text-sm text-gray-500">Belum ada pelanggan dengan transaksi
+                                                terbaru.</p>
+                                        </li>
+                                    @endforelse
                                 </ul>
                             </div>
                         </div>
-                        <!-- Sessions by device Card -->
-                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
 
-                            <!-- Card Title -->
+                        {{-- Acquisition Overview (static or bound) --}}
+                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
                             <h3 class="text-xl leading-none font-bold text-gray-900 mb-10">Acquisition Overview</h3>
                             <div class="block w-full overflow-x-auto">
                                 <table class="items-center w-full bg-transparent border-collapse">
@@ -368,139 +245,91 @@
                                         <tr>
                                             <th
                                                 class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
-                                                Top Channels</th>
+                                                Top Channels
+                                            </th>
                                             <th
                                                 class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
-                                                Users</th>
+                                                Users
+                                            </th>
                                             <th
                                                 class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-100">
-                                        <tr class="text-gray-500">
-                                            <th
-                                                class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                                                Organic Search</th>
-                                            <td
-                                                class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-                                                5,649</td>
-                                            <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                                <div class="flex items-center">
-                                                    <span class="mr-2 text-xs font-medium">30%</span>
-                                                    <div class="relative w-full">
-                                                        <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                            <div class="bg-cyan-600 h-2 rounded-sm"
-                                                                style="width: 30%"></div>
+                                        @foreach ($acquisition as $row)
+                                            <tr class="text-gray-500">
+                                                <th
+                                                    class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
+                                                    {{ $row['channel'] }}
+                                                </th>
+                                                <td
+                                                    class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+                                                    {{ number_format($row['users'], 0, ',', '.') }}
+                                                </td>
+                                                <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
+                                                    <div class="flex items-center">
+                                                        <span
+                                                            class="mr-2 text-xs font-medium">{{ $row['percent'] }}%</span>
+                                                        <div class="relative w-full">
+                                                            <div class="w-full bg-gray-200 rounded-sm h-2">
+                                                                <div class="{{ $row['barClass'] }} h-2 rounded-sm"
+                                                                    style="width: {{ $row['percent'] }}%"></div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="text-gray-500">
-                                            <th
-                                                class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                                                Referral</th>
-                                            <td
-                                                class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-                                                4,025</td>
-                                            <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                                <div class="flex items-center">
-                                                    <span class="mr-2 text-xs font-medium">24%</span>
-                                                    <div class="relative w-full">
-                                                        <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                            <div class="bg-orange-300 h-2 rounded-sm"
-                                                                style="width: 24%"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="text-gray-500">
-                                            <th
-                                                class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                                                Direct</th>
-                                            <td
-                                                class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-                                                3,105</td>
-                                            <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                                <div class="flex items-center">
-                                                    <span class="mr-2 text-xs font-medium">18%</span>
-                                                    <div class="relative w-full">
-                                                        <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                            <div class="bg-teal-400 h-2 rounded-sm"
-                                                                style="width: 18%"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="text-gray-500">
-                                            <th
-                                                class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                                                Social</th>
-                                            <td
-                                                class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-                                                1251</td>
-                                            <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                                <div class="flex items-center">
-                                                    <span class="mr-2 text-xs font-medium">12%</span>
-                                                    <div class="relative w-full">
-                                                        <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                            <div class="bg-pink-600 h-2 rounded-sm"
-                                                                style="width: 12%"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="text-gray-500">
-                                            <th
-                                                class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                                                Other</th>
-                                            <td
-                                                class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-                                                734</td>
-                                            <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                                <div class="flex items-center">
-                                                    <span class="mr-2 text-xs font-medium">9%</span>
-                                                    <div class="relative w-full">
-                                                        <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                            <div class="bg-indigo-600 h-2 rounded-sm"
-                                                                style="width: 9%"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="text-gray-500">
-                                            <th
-                                                class="border-t-0 align-middle text-sm font-normal whitespace-nowrap p-4 pb-0 text-left">
-                                                Email</th>
-                                            <td
-                                                class="border-t-0 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4 pb-0">
-                                                456</td>
-                                            <td class="border-t-0 align-middle text-xs whitespace-nowrap p-4 pb-0">
-                                                <div class="flex items-center">
-                                                    <span class="mr-2 text-xs font-medium">7%</span>
-                                                    <div class="relative w-full">
-                                                        <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                            <div class="bg-purple-500 h-2 rounded-sm"
-                                                                style="width: 7%"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
 
                     </div>
                 </div>
+
+                {{-- Chart.js CDN and init --}}
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    const weeklyLabels = {!! json_encode($weeklyLabels) !!};
+                    const weeklyTotals = {!! json_encode($weeklyTotals) !!};
+
+                    const ctx = document.getElementById('weeklySalesChart').getContext('2d');
+                    const weeklyChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: weeklyLabels,
+                            datasets: [{
+                                label: 'Penjualan (Rp)',
+                                data: weeklyTotals,
+                                borderColor: '#4f46e5',
+                                backgroundColor: 'rgba(79,70,229,0.1)',
+                                fill: true,
+                                tension: 0.4,
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    ticks: {
+                                        callback: function(value) {
+                                            const formatter = new Intl.NumberFormat('id-ID');
+                                            return 'Rp' + formatter.format(value);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
             </main>
+
             <footer
                 class="bg-white md:flex md:items-center md:justify-between shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4">
                 <ul class="flex items-center flex-wrap mb-6 md:mb-0">

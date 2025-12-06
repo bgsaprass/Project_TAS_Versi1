@@ -172,5 +172,7 @@
             document.getElementById('buyForm').submit();
         }
     </script>
+
+    @include('assets.footer')
 </body>
 </html>

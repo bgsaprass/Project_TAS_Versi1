@@ -139,83 +139,55 @@
                 </div>
 
                 <!-- Table Akun Start-->
-                <div class="overflow-x-auto">
-                    <div class="align-middle inline-block min-w-full">
-                        <div class="shadow overflow-hidden rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Pesanan: {{ $user->name }}</h2>
+
+                    <div class="overflow-x-auto bg-white shadow rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50 text-gray-600 text-sm uppercase tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-3 text-left">ID</th>
+                                    <th class="px-6 py-3 text-left">Total</th>
+                                    <th class="px-6 py-3 text-left">Status</th>
+                                    <th class="px-6 py-3 text-left">Pengiriman</th>
+                                    <th class="px-6 py-3 text-left">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200 text-sm">
+                                @foreach ($orders as $order)
                                     <tr>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Nama</th>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Email
-                                        </th>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Tanggal
-                                            Daftar
-                                        </th>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Status
-                                        </th>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
+                                        <td class="px-6 py-4 font-medium text-gray-900">{{ $order->id }}</td>
+                                        <td class="px-6 py-4">Rp{{ number_format($order->total, 0, ',', '.') }}</td>
+                                        <td class="px-6 py-4">
+                                            <span
+                                                class="inline-block px-2 py-1 rounded-full text-xs font-semibold
+                                {{ $order->status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+                                                {{ ucfirst($order->status) }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span
+                                                class="inline-block px-2 py-1 rounded-full text-xs font-semibold
+                                @switch($order->shipping_status)
+                                    @case('pending') bg-red-100 text-red-700 @break
+                                    @case('processing') bg-yellow-100 text-yellow-700 @break
+                                    @case('shipped') bg-blue-100 text-blue-700 @break
+                                    @case('delivered') bg-green-100 text-green-700 @break
+                                    @default bg-gray-100 text-gray-700
+                                @endswitch">
+                                                {{ ucfirst($order->shipping_status) }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <a href="{{ route('admin.orders.show', $order->id) }}"
+                                                class="text-sm text-white bg-indigo-600 hover:bg-indigo-700 px-3 py-1 rounded">
+                                                Detail
+                                            </a>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    @forelse($users as $user)
-                                        <tr class="hover:bg-gray-50">
-                                            <td class="p-4 whitespace-nowrap flex items-center space-x-4">
-                                                <img class="h-10 w-10 rounded-full"
-                                                    src="{{ 'https://ui-avatars.com/api/?name=' . urlencode($user->name) }}"
-                                                    alt="{{ $user->name }} avatar">
-                                                <div>
-                                                    <div class="text-sm font-semibold text-gray-900">
-                                                        {{ $user->name }}</div>
-                                                </div>
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm text-gray-700">{{ $user->email }}
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm text-gray-700">
-                                                {{ $user->role ?? 'user' }}
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm text-gray-700">
-                                                {{ optional($user->created_at)->format('Y-m-d') }}
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm text-gray-700">
-                                                <div class="flex items-center">
-                                                    <div
-                                                        class="h-2.5 w-2.5 rounded-full {{ $user->email_verified_at ? 'bg-green-500' : 'bg-red-500' }} mr-2">
-                                                    </div>
-                                                    {{ $user->email_verified_at ? 'Active' : 'Unverified' }}
-                                                </div>
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap space-x-2">
-                                                <a href="{{ route('admin.users.edit', $user->id) }}"
-                                                    class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                    Edit
-                                                </a>
-                                                <form action="{{ route('admin.users.destroy', $user->id) }}"
-                                                    method="POST" onsubmit="return confirm('Hapus pengguna ini?');"
-                                                    class="inline-block">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2">
-                                                        Hapus
-                                                    </button>
-                                                </form>
-                                                <a href="{{ route('admin.users.orders', $user->id) }}"
-                                                    class="text-sm text-white bg-indigo-600 hover:bg-indigo-700 px-3 py-1 rounded">
-                                                    Lihat Pesanan
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="6" class="p-4 text-center text-gray-500">Tidak ada
-                                                pengguna
-                                                ditemukan.</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <!-- Table Akun Finish-->

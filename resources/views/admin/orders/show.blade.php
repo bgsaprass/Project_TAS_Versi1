@@ -3,6 +3,7 @@
 
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141734189-6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -29,6 +30,7 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 @include('assets.head-dashboard')
 
@@ -139,89 +141,122 @@
                 </div>
 
                 <!-- Table Akun Start-->
-                <div class="overflow-x-auto">
-                    <div class="align-middle inline-block min-w-full">
-                        <div class="shadow overflow-hidden rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Nama</th>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Email
-                                        </th>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Tanggal
-                                            Daftar
-                                        </th>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Status
-                                        </th>
-                                        <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    @forelse($users as $user)
-                                        <tr class="hover:bg-gray-50">
-                                            <td class="p-4 whitespace-nowrap flex items-center space-x-4">
-                                                <img class="h-10 w-10 rounded-full"
-                                                    src="{{ 'https://ui-avatars.com/api/?name=' . urlencode($user->name) }}"
-                                                    alt="{{ $user->name }} avatar">
-                                                <div>
-                                                    <div class="text-sm font-semibold text-gray-900">
-                                                        {{ $user->name }}</div>
-                                                </div>
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm text-gray-700">{{ $user->email }}
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm text-gray-700">
-                                                {{ $user->role ?? 'user' }}
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm text-gray-700">
-                                                {{ optional($user->created_at)->format('Y-m-d') }}
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm text-gray-700">
-                                                <div class="flex items-center">
-                                                    <div
-                                                        class="h-2.5 w-2.5 rounded-full {{ $user->email_verified_at ? 'bg-green-500' : 'bg-red-500' }} mr-2">
-                                                    </div>
-                                                    {{ $user->email_verified_at ? 'Active' : 'Unverified' }}
-                                                </div>
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap space-x-2">
-                                                <a href="{{ route('admin.users.edit', $user->id) }}"
-                                                    class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-3 py-2">
-                                                    Edit
-                                                </a>
-                                                <form action="{{ route('admin.users.destroy', $user->id) }}"
-                                                    method="POST" onsubmit="return confirm('Hapus pengguna ini?');"
-                                                    class="inline-block">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2">
-                                                        Hapus
-                                                    </button>
-                                                </form>
-                                                <a href="{{ route('admin.users.orders', $user->id) }}"
-                                                    class="text-sm text-white bg-indigo-600 hover:bg-indigo-700 px-3 py-1 rounded">
-                                                    Lihat Pesanan
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="6" class="p-4 text-center text-gray-500">Tidak ada
-                                                pengguna
-                                                ditemukan.</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="p-6">
+                    {{-- Breadcrumb --}}
+                    <nav class="text-sm text-gray-500 mb-4">
+                        <ol class="list-reset flex">
+                            <li><a href="{{ route('admin.index') }}" class="text-blue-600 hover:underline">Home</a></li>
+                            <li><span class="mx-2">›</span></li>
+                            <li><a href="{{ route('admin.orders.index') }}"
+                                    class="text-blue-600 hover:underline">Pesanan</a></li>
+                            <li><span class="mx-2">›</span></li>
+                            <li class="text-gray-700">Detail</li>
+                        </ol>
+                    </nav>
+
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Detail Pesanan #{{ $order->id }}</h2>
+
+                    <div class="bg-white shadow rounded-lg p-6 mb-6">
+                        <p><strong>User:</strong> {{ $order->user->name }}</p>
+                        <p><strong>Total:</strong> Rp{{ number_format($order->total, 0, ',', '.') }}</p>
+                        <p><strong>Status Pembayaran:</strong>
+                            <span
+                                class="inline-block px-2 py-1 rounded-full text-xs font-semibold
+                {{ $order->status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+                                {{ ucfirst($order->status) }}
+                            </span>
+                        </p>
+                        <p><strong>Status Pengiriman:</strong>
+                            <span
+                                class="inline-block px-2 py-1 rounded-full text-xs font-semibold
+                @switch($order->shipping_status)
+                    @case('pending') bg-red-100 text-red-700 @break
+                    @case('processing') bg-yellow-100 text-yellow-700 @break
+                    @case('shipped') bg-blue-100 text-blue-700 @break
+                    @case('delivered') bg-green-100 text-green-700 @break
+                    @default bg-gray-100 text-gray-700
+                @endswitch">
+                                {{ ucfirst($order->shipping_status) }}
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="bg-white shadow rounded-lg p-6 mb-6">
+                        <h4 class="text-lg font-semibold mb-3">Item Pesanan:</h4>
+                        <ul class="list-disc list-inside text-sm text-gray-700">
+                            @foreach ($order->items as $item)
+                                <li>{{ $item->name }} x {{ $item->quantity }}
+                                    (Rp{{ number_format($item->price, 0, ',', '.') }})
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <form action="{{ route('admin.orders.updateShipping', $order->id) }}" method="POST">
+                            @csrf
+                            <div style="margin-bottom: 1rem;">
+                                <label for="shipping_status"
+                                    style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem; font-weight: 500; color: #374151;">
+                                    Update Status Pengiriman:
+                                </label>
+                                <select name="shipping_status" id="shipping_status"
+                                    style="display: block; width: 100%; padding: 0.5rem 0.75rem; border: 1px solid #d1d5db; border-radius: 0.375rem; background-color: white; font-size: 0.875rem; color: #374151;">
+                                    <option value="pending"
+                                        {{ $order->shipping_status == 'pending' ? 'selected' : '' }}>
+                                        Pending
+                                    </option>
+                                    <option value="processing"
+                                        {{ $order->shipping_status == 'processing' ? 'selected' : '' }}>
+                                        Processing
+                                    </option>
+                                    <option value="shipped"
+                                        {{ $order->shipping_status == 'shipped' ? 'selected' : '' }}>
+                                        Shipped
+                                    </option>
+                                    <option value="delivered"
+                                        {{ $order->shipping_status == 'delivered' ? 'selected' : '' }}>
+                                        Delivered
+                                    </option>
+                                </select>
+                            </div>
+                            <button type="submit"
+                                style="display: inline-flex; align-items: center; padding: 0.625rem 1rem; background-color: #10b981; border: 1px solid transparent; border-radius: 0.375rem; font-weight: 600; font-size: 0.75rem; color: white; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s; cursor: pointer; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);"
+                                onmouseover="this.style.backgroundColor='#059669'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'"
+                                onmouseout="this.style.backgroundColor='#10b981'; this.style.boxShadow='0 1px 2px 0 rgba(0, 0, 0, 0.05)'">
+                                <i class="fa-solid fa-check" style="margin-right: 0.5rem;"></i> Update Status
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <!-- Table Akun Finish-->
             </main>
         </div>
     </div>
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                confirmButtonColor: '#6f42c1',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops!',
+                text: '{{ session('error') }}',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Coba Lagi'
+            });
+        </script>
+    @endif
+
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="https://themewagon.github.io/windster/app.bundle.js"></script>
     <script src="https://unpkg.com/flowbite@latest/dist/flowbite.min.js"></script>

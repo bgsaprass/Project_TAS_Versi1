@@ -52,7 +52,6 @@
                             <a href="{{ route('register') }}" class="btn btn-primary">Buat Akun</a>
                         @else
                             @if (Auth::user()->role === 'admin')
-                                <a href="{{ route('admin.index') }}" class="btn btn-outline-dark me-2">Admin Dashboard</a>
                             @else
                                 <a href="{{ route('cart.index') }}" class="position-relative me-4 my-auto">
                                     <i class="fa fa-shopping-bag fa-2x"></i>
@@ -117,9 +116,17 @@
                     </div>
 
                     <div class="d-grid gap-2">
-                        <a href="{{ route('orders') }}" class="btn btn-outline-success">
-                            <i class="fa fa-box me-2"></i> Lihat Pesanan Saya
-                        </a>
+                        @if (Auth::user()->role === 'admin')
+                            {{-- Tombol khusus admin --}}
+                            <a href="{{ route('admin.index') }}" class="btn btn-outline-dark">
+                                <i class="fa fa-chart-line me-2"></i> Lihat Statistik Penjualan
+                            </a>
+                        @else
+                            {{-- Tombol untuk user biasa --}}
+                            <a href="{{ route('orders') }}" class="btn btn-outline-success">
+                                <i class="fa fa-box me-2"></i> Lihat Pesanan Saya
+                            </a>
+                        @endif
 
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -128,10 +135,32 @@
                             </button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
     </main>
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops!',
+        text: '{{ session('error') }}',
+        confirmButtonColor: '#d33'
+    });
+</script>
+@endif
+
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: '{{ session('success') }}',
+        confirmButtonColor: '#3085d6'
+    });
+</script>
+@endif
 
 </body>
 

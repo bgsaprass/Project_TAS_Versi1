@@ -11,7 +11,6 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UsersController;
-use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\AddressController;
@@ -103,29 +102,37 @@ Route::get('/product_detail/{id}', [ShopController::class, 'show'])->name('produ
 Route::get('/shop/show/{id}', [ShopController::class, 'show'])->name('shop.show');
 
 // =======================
-// CART ROUTES
+// CART & CHECKOUT ROUTES
 // =======================
 
-Route::get('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart.index');
-Route::post('/cart/add/{id}', [CartController::class, 'add'])->middleware('auth')->name('cart.add');
-Route::put('/cart/update/{id}', [CartController::class, 'update'])->middleware('auth')->name('cart.update');
-Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->middleware('auth')->name('cart.remove');
-Route::post('/cart/checkout', [CartController::class, 'checkout'])->middleware('auth')->name('cart.checkout');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
-// =======================
-// CHECKOUT & PAYMENT ROUTES
-// =======================
+    // Semua user bisa lihat halaman checkout (tampilan saja)
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('auth')->name('checkout');
-Route::post('/checkout-selected', [CheckoutController::class, 'checkoutSelected'])->middleware('auth')->name('checkout.selected');
-Route::post('/checkout/direct/{id}', [CheckoutController::class, 'direct'])->middleware('auth')->name('checkout.direct');
-Route::post('/checkout/process', [CheckoutController::class, 'process'])->middleware('auth')->name('checkout.process');
-Route::post('/checkout/finalize', [CheckoutController::class, 'finalize'])->middleware('auth')->name('checkout.finalize');
+    // Hanya user biasa yang boleh melakukan aksi pembelian
+    Route::middleware(\App\Http\Middleware\PreventAdminPurchase::class)->group(function () {
+        // Cart actions
+        Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+        Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+        Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+        Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
-// Halaman metode pembayaran
-Route::get('/checkout/bank', [CheckoutController::class, 'bankTransfer'])->middleware('auth')->name('checkout.bank');
-Route::get('/checkout/cod', [CheckoutController::class, 'cod'])->middleware('auth')->name('checkout.cod');
-Route::get('/checkout/ewallet', [CheckoutController::class, 'eWallet'])->middleware('auth')->name('checkout.ewallet');
+        // Checkout actions
+        Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+        Route::post('/checkout-selected', [CheckoutController::class, 'checkoutSelected'])->name('checkout.selected');
+        Route::post('/checkout/direct/{id}', [CheckoutController::class, 'direct'])->name('checkout.direct');
+        Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+        Route::post('/checkout/finalize', [CheckoutController::class, 'finalize'])->name('checkout.finalize');
+        Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+
+        // Payment methods
+        Route::get('/checkout/bank', [CheckoutController::class, 'bankTransfer'])->name('checkout.bank');
+        Route::get('/checkout/cod', [CheckoutController::class, 'cod'])->name('checkout.cod');
+        Route::get('/checkout/ewallet', [CheckoutController::class, 'eWallet'])->name('checkout.ewallet');
+    });
+});
 
 // =======================
 // ORDERS & CONTACT ROUTES
@@ -146,15 +153,29 @@ Route::post('/address/store', [AddressController::class, 'store'])->middleware('
 // ADMIN ROUTES
 // =======================
 
-Route::prefix('admin')->middleware(['auth', IsAdmin::class])->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('index');
-    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
-    Route::get('/users/{user}/edit', [UsersController::class, 'edit'])->name('users.edit');
-    Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
-    Route::resource('products', ProductController::class);
-    Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
-    Route::get('/orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
-    Route::post('/orders/{order}/update-shipping', [\App\Http\Controllers\Admin\OrderController::class, 'updateShipping'])->name('orders.updateShipping');
-});
+Route::prefix('admin')
+    ->middleware(['auth', \App\Http\Middleware\IsAdmin::class]) // panggil alias middleware, jangan import class di web.php
+    ->name('admin.')
+    ->group(function () {
+        // Dashboard
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('index');
 
+        // Products (resourceful)
+        Route::resource('products', ProductController::class);
 
+        // Users (resourceful)
+        Route::resource('users', UsersController::class);
+
+        // Orders
+        Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
+        Route::get('/orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
+        Route::put('/orders/{order}/update-status', [\App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+
+        // Reports & Sales
+        Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
+        Route::get('/sales', [AdminController::class, 'sales'])->name('sales');
+
+        // Settings
+        Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
+        Route::post('/settings', [AdminController::class, 'updateSettings'])->name('settings.update');
+    });

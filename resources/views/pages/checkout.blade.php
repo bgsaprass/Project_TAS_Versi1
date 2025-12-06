@@ -227,6 +227,18 @@
 
     <!-- JavaScript Libraries -->
     @include('assets.libraries')
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops!',
+                text: '{{ session('error') }}',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Coba Lagi'
+            });
+        </script>
+    @endif
 </body>
 
 </html>
