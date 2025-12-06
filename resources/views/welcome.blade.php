@@ -49,9 +49,9 @@
             <div class="d-flex justify-content-between">
                 <div class="top-info ps-2">
                     <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
-                            class="text-white">123 Street, New York</a></small>
+                            class="text-white">1 Diponegoro, Salatiga</a></small>
                     <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
-                            class="text-white">Email@Example.com</a></small>
+                            class="text-white">CepatBeli@gmail.com</a></small>
                 </div>
                 <div class="top-link pe-2">
                     <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
@@ -63,7 +63,7 @@
         <div class="container px-0">
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
                 <a href="{{ route('welcome') }}" class="navbar-brand">
-                    <h1 class="text-primary display-6">Fruitables</h1>
+                    <h1 class="text-primary display-6">CepatBeli</h1>
                 </a>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -139,8 +139,8 @@
         <div class="container py-5">
             <div class="row g-5 align-items-center">
                 <div class="col-md-12 col-lg-7">
-                    <h4 class="mb-3 text-secondary">100% Organic Foods</h4>
-                    <h1 class="mb-5 display-3 text-primary">Organic Veggies & Fruits Foods</h1>
+                    <h4 class="mb-3 text-secondary">Supermarket Online Keluarga</h4>
+                    <h1 class="mb-5 display-3 text-primary">Mulai dari Sembako Hingga Pasar Organik</h1>
                     <div class="position-relative mx-auto">
                         <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill"
                             type="number" placeholder="Search">
@@ -155,12 +155,12 @@
                             <div class="carousel-item active rounded">
                                 <img src="{{ asset('img/hero-img-1.png') }}"
                                     class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
-                                <a href="#" class="btn px-4 py-2 text-white rounded">Fruites</a>
+                                <a href="#" class="btn px-4 py-2 text-white rounded">Buah & Sayur</a>
                             </div>
                             <div class="carousel-item rounded">
-                                <img src="{{ asset('img/hero-img-2.jpg') }}" class="img-fluid w-100 h-100 rounded"
+                                <img src="{{ asset('img/hero-img-3.jpg') }}" class="img-fluid w-100 h-100 rounded"
                                     alt="Second slide">
-                                <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a>
+                                <a href="#" class="btn px-4 py-2 text-white rounded">Sembako</a>
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselId"
@@ -241,14 +241,14 @@
             <div class="tab-class text-center">
                 <div class="row g-4">
                     <div class="col-lg-4 text-start">
-                        <h1 class="fw-bold">Our Organic Products</h1>
+                        <h1 class="fw-bold">Produk kami</h1>
                     </div>
                     <div class="col-lg-8 text-end">
                         <ul class="nav nav-pills d-inline-flex text-center mb-5">
                             <li class="nav-item">
                                 <a class="d-flex m-2 py-2 bg-light rounded-pill {{ empty($selectedCategory) ? 'active' : '' }}"
                                     href="{{ route('welcome') }}">
-                                    <span class="text-dark" style="width: 130px;">All Products</span>
+                                    <span class="text-dark" style="width: 130px;">Semua Product</span>
                                 </a>
                             </li>
                             @foreach ($categories as $category)
@@ -306,7 +306,7 @@
 
                                     @if (isset($products) && $products->isEmpty())
                                         <div class="col-12">
-                                            <p class="text-center">No products found.</p>
+                                            <p class="text-center">Tidak Ada Produk.</p>
                                         </div>
                                     @endif
                                 </div>
