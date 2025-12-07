@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="utf-8">
-    <title>Fruitables - Vegetable Website Template</title>
+    <title>CepatBeli - Supermarket Online</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -54,9 +54,9 @@
                             class="text-white">CepatBeli@gmail.com</a></small>
                 </div>
                 <div class="top-link pe-2">
-                    <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                    <a href="#" class="text-white"><small class="text-white mx-2">Kebijakan Privasi</small>/</a>
+                    <a href="#" class="text-white"><small class="text-white mx-2">Ketentuan Penggunaan</small>/</a>
+                    <a href="#" class="text-white"><small class="text-white ms-2">Penjualan & Pengembalian</small></a>
                 </div>
             </div>
         </div>
@@ -71,19 +71,16 @@
                 </button>
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
-                        <a href="{{ route('welcome') }}" class="nav-item nav-link active">Home</a>
-                        <a href="{{ route('shop') }}" class="nav-item nav-link">Shop</a>
-                        <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
+                        <a href="{{ route('welcome') }}" class="nav-item nav-link active">Beranda</a>
+                        <a href="{{ route('shop') }}" class="nav-item nav-link">Belanja</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Halaman</a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a href="cart.html" class="dropdown-item">Cart</a>
-                                <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
+                                <a href="{{ route('cart.index') }}" class="dropdown-item">Keranjang</a>
+                                <a href="{{ route('checkout') }}" class="dropdown-item">Pembayaran</a>
                             </div>
                         </div>
-                        <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
+                        <a href="{{ route('contact') }}" class="nav-item nav-link">Kontak</a>
                     </div>
                     <div class="d-flex m-3 me-0">
                         <button
@@ -118,12 +115,12 @@
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Cari berdasarkan kata kunci</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex align-items-center">
                     <div class="input-group w-75 mx-auto d-flex">
-                        <input type="search" class="form-control p-3" placeholder="keywords"
+                        <input type="search" class="form-control p-3" placeholder="kata kunci"
                             aria-describedby="search-icon-1">
                         <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
                     </div>
@@ -143,10 +140,10 @@
                     <h1 class="mb-5 display-3 text-primary">Mulai dari Sembako Hingga Pasar Organik</h1>
                     <div class="position-relative mx-auto">
                         <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill"
-                            type="number" placeholder="Search">
+                            type="text" placeholder="Cari produk">
                         <button type="submit"
                             class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
-                            style="top: 0; right: 25%;">Submit Now</button>
+                            style="top: 0; right: 25%;">Cari</button>
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-5">
@@ -154,24 +151,24 @@
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active rounded">
                                 <img src="{{ asset('img/hero-img-1.png') }}"
-                                    class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                                    class="img-fluid w-100 h-100 bg-secondary rounded" alt="Slide Pertama">
                                 <a href="#" class="btn px-4 py-2 text-white rounded">Buah & Sayur</a>
                             </div>
                             <div class="carousel-item rounded">
                                 <img src="{{ asset('img/hero-img-3.jpg') }}" class="img-fluid w-100 h-100 rounded"
-                                    alt="Second slide">
+                                    alt="Slide Kedua">
                                 <a href="#" class="btn px-4 py-2 text-white rounded">Sembako</a>
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselId"
                             data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
+                            <span class="visually-hidden">Sebelumnya</span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#carouselId"
                             data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
+                            <span class="visually-hidden">Berikutnya</span>
                         </button>
                     </div>
                 </div>
@@ -191,8 +188,8 @@
                             <i class="fas fa-car-side fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>Free Shipping</h5>
-                            <p class="mb-0">Free on order over $300</p>
+                            <h5>Pengiriman Gratis</h5>
+                            <p class="mb-0">Gratis untuk pesanan di atas Rp1.000.000</p>
                         </div>
                     </div>
                 </div>
@@ -202,8 +199,8 @@
                             <i class="fas fa-user-shield fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>Security Payment</h5>
-                            <p class="mb-0">100% security payment</p>
+                            <h5>Pembayaran Aman</h5>
+                            <p class="mb-0">Pembayaran 100% Aman</p>
                         </div>
                     </div>
                 </div>
@@ -213,8 +210,8 @@
                             <i class="fas fa-exchange-alt fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>30 Day Return</h5>
-                            <p class="mb-0">30 day money guarantee</p>
+                            <h5>Pengembalian 30 Hari</h5>
+                            <p class="mb-0">Jaminan uang kembali 30 hari</p>
                         </div>
                     </div>
                 </div>
@@ -224,8 +221,8 @@
                             <i class="fa fa-phone-alt fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>24/7 Support</h5>
-                            <p class="mb-0">Support every time fast</p>
+                            <h5>Dukungan 24/7</h5>
+                            <p class="mb-0">Dukungan Tersedia Setiap Saat</p>
                         </div>
                     </div>
                 </div>
@@ -324,17 +321,16 @@
                                                     alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">Fruits</div>
+                                                style="top: 10px; left: 10px;">Buah</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
+                                                <h4>Anggur</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                                                     eiusmod te incididunt</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">Rp83.229 / kg</p>
                                                     <a href="#"
                                                         class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                        cart</a>
+                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -346,17 +342,16 @@
                                                     alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">Fruits</div>
+                                                style="top: 10px; left: 10px;">Buah</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Raspberries</h4>
+                                                <h4>Raspberi</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                                                     eiusmod te incididunt</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">Rp83.229 / kg</p>
                                                     <a href="#"
                                                         class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                        cart</a>
+                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -376,17 +371,16 @@
                                                     alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">Fruits</div>
+                                                style="top: 10px; left: 10px;">Buah</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Oranges</h4>
+                                                <h4>Jeruk</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                                                     eiusmod te incididunt</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">Rp83.229 / kg</p>
                                                     <a href="#"
                                                         class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                        cart</a>
+                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -398,17 +392,16 @@
                                                     alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">Fruits</div>
+                                                style="top: 10px; left: 10px;">Buah</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Apple</h4>
+                                                <h4>Apel</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                                                     eiusmod te incididunt</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">Rp83.229 / kg</p>
                                                     <a href="#"
                                                         class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                        cart</a>
+                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -428,17 +421,16 @@
                                                     alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">Fruits</div>
+                                                style="top: 10px; left: 10px;">Buah</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
+                                                <h4>Anggur</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                                                     eiusmod te incididunt</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">Rp83.229 / kg</p>
                                                     <a href="#"
                                                         class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                        cart</a>
+                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -450,17 +442,16 @@
                                                     alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">Fruits</div>
+                                                style="top: 10px; left: 10px;">Buah</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Apricots</h4>
+                                                <h4>Aprikot</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                                                     eiusmod te incididunt</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">Rp83.229 / kg</p>
                                                     <a href="#"
                                                         class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                        cart</a>
+                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -480,17 +471,16 @@
                                                     alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">Fruits</div>
+                                                style="top: 10px; left: 10px;">Buah</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Banana</h4>
+                                                <h4>Pisang</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                                                     eiusmod te incididunt</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">Rp83.229 / kg</p>
                                                     <a href="#"
                                                         class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                        cart</a>
+                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -502,17 +492,16 @@
                                                     alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">Fruits</div>
+                                                style="top: 10px; left: 10px;">Buah</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Raspberries</h4>
+                                                <h4>Raspberi</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                                                     eiusmod te incididunt</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">Rp83.229 / kg</p>
                                                     <a href="#"
                                                         class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                        cart</a>
+                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -524,17 +513,16 @@
                                                     alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                style="top: 10px; left: 10px;">Fruits</div>
+                                                style="top: 10px; left: 10px;">Buah</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Oranges</h4>
+                                                <h4>Jeruk</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
                                                     eiusmod te incididunt</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">Rp83.229 / kg</p>
                                                     <a href="#"
                                                         class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                        cart</a>
+                                                            class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -561,8 +549,8 @@
                                 alt="">
                             <div class="px-4 rounded-bottom">
                                 <div class="service-content bg-primary text-center p-4 rounded">
-                                    <h5 class="text-white">Fresh Apples</h5>
-                                    <h3 class="mb-0">20% OFF</h3>
+                                    <h5 class="text-white">Apel Segar</h5>
+                                    <h3 class="mb-0">Diskon 20%</h3>
                                 </div>
                             </div>
                         </div>
@@ -575,8 +563,8 @@
                                 alt="">
                             <div class="px-4 rounded-bottom">
                                 <div class="service-content bg-light text-center p-4 rounded">
-                                    <h5 class="text-primary">Tasty Fruits</h5>
-                                    <h3 class="mb-0">Free delivery</h3>
+                                    <h5 class="text-primary">Buah Lezat</h5>
+                                    <h3 class="mb-0">Pengiriman Gratis</h3>
                                 </div>
                             </div>
                         </div>
@@ -589,8 +577,8 @@
                                 alt="">
                             <div class="px-4 rounded-bottom">
                                 <div class="service-content bg-secondary text-center p-4 rounded">
-                                    <h5 class="text-white">Exotic Vegetable</h5>
-                                    <h3 class="mb-0">Discount 30$</h3>
+                                    <h5 class="text-white">Sayuran Eksotis</h5>
+                                    <h3 class="mb-0">Diskon Rp500.376</h3>
                                 </div>
                             </div>
                         </div>
@@ -604,7 +592,7 @@
 
     <!-- Vesitable Shop Start-->
     <div class="container vesitable py-5">
-        <h1 class="mb-0">Fresh Organic Vegetables</h1>
+        <h1 class="mb-0">Sayuran Organik Segar</h1>
         <div class="owl-carousel vegetable-carousel">
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
@@ -612,14 +600,13 @@
                         alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Vegetable</div>
+                    style="top: 10px; right: 10px;">Sayuran</div>
                 <div class="p-4 rounded-bottom">
-                    <h4>Parsely</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                    <p>Parsley (peterseli) adalah herba aromatik Mediterania yang umum digunakan sebagai hiasan (garnish) atau bumbu masakan.</p>
                     <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                        <p class="text-dark fs-5 fw-bold mb-0">Rp199.817 / kg</p>
                         <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                     </div>
                 </div>
             </div>
@@ -629,14 +616,14 @@
                         alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Vegetable</div>
+                    style="top: 10px; right: 10px;">Sayuran</div>
                 <div class="p-4 rounded-bottom">
-                    <h4>Parsely</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                    <h4>Tomat</h4>
+                    <p>Tomat adalah buah serbaguna berwarna merah cerah yang digunakan sebagai sayuran dalam masakan sehari-hari.</p>
                     <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                        <p class="text-dark fs-5 fw-bold mb-0">Rp159.954 / kg</p>
                         <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                     </div>
                 </div>
             </div>
@@ -646,14 +633,14 @@
                         alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Vegetable</div>
+                    style="top: 10px; right: 10px;">Buah</div>
                 <div class="p-4 rounded-bottom">
-                    <h4>Banana</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                    <h4>Pisang</h4>
+                    <p>Pisang adalah buah tropis populer berkulit kuning (saat matang) dan berdaging lembut yang tumbuh dalam tandan besar.</p>
                     <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
+                        <p class="text-dark fs-5 fw-bold mb-0">Rp83.229 / kg</p>
                         <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                     </div>
                 </div>
             </div>
@@ -663,14 +650,14 @@
                         alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Vegetable</div>
+                    style="top: 10px; right: 10px;">Sayuran</div>
                 <div class="p-4 rounded-bottom">
-                    <h4>Bell Papper</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                    <h4>Paprika</h4>
+                    <p>Paprika adalah sejenis cabai besar yang memiliki rasa manis, terdapat 3 warna yaitu merah, kuning, hijau dan berbentuk lonceng.</p>
                     <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
+                        <p class="text-dark fs-5 fw-bold mb-0">Rp74.890 / kg</p>
                         <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                     </div>
                 </div>
             </div>
@@ -680,65 +667,14 @@
                         alt="">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Vegetable</div>
+                    style="top: 10px; right: 10px;">Sayuran</div>
                 <div class="p-4 rounded-bottom">
-                    <h4>Potatoes</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                    <h4>Kentang</h4>
+                    <p>Kentang adalah umbi batang bertepung dari tanaman Solanum tuberosum, sering digunakan sebagai makanan pokok</p>
                     <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
+                        <p class="text-dark fs-5 fw-bold mb-0">Rp40.030 / kg</p>
                         <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-                <div class="vesitable-img">
-                    <img src="{{ asset('img/vegetable-item-6.jpg') }}" class="img-fluid w-100 rounded-top"
-                        alt="">
-                </div>
-                <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Vegetable</div>
-                <div class="p-4 rounded-bottom">
-                    <h4>Parsely</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-                <div class="vesitable-img">
-                    <img src="{{ asset('img/vegetable-item-5.jpg') }}" class="img-fluid w-100 rounded-top"
-                        alt="">
-                </div>
-                <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Vegetable</div>
-                <div class="p-4 rounded-bottom">
-                    <h4>Potatoes</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-                <div class="vesitable-img">
-                    <img src="{{ asset('img/vegetable-item-6.jpg') }}" class="img-fluid w-100 rounded-top"
-                        alt="">
-                </div>
-                <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Vegetable</div>
-                <div class="p-4 rounded-bottom">
-                    <h4>Parsely</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                     </div>
                 </div>
             </div>
@@ -754,12 +690,11 @@
             <div class="row g-4 align-items-center">
                 <div class="col-lg-6">
                     <div class="py-4">
-                        <h1 class="display-3 text-white">Fresh Exotic Fruits</h1>
-                        <p class="fw-normal display-3 text-dark mb-4">in Our Store</p>
-                        <p class="mb-4 text-dark">The generated Lorem Ipsum is therefore always free from repetition
-                            injected humour, or non-characteristic words etc.</p>
+                        <h1 class="display-3 text-white">Buah Eksotis Segar</h1>
+                        <p class="fw-normal display-3 text-dark mb-4">di Toko Kami</p>
+                        <p class="mb-4 text-dark">Buah Segar dan Eksotis yang dipanen langsung dari perkebunan dan terjamin kesegarannya</p>
                         <a href="#"
-                            class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5">BUY</a>
+                            class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5">BELI</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -767,10 +702,10 @@
                         <img src="{{ asset('img/baner-1.png') }}" class="img-fluid w-100 rounded" alt="">
                         <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute"
                             style="width: 140px; height: 140px; top: 0; left: 0;">
-                            <h1 style="font-size: 100px;">1</h1>
+                            <h1 style="font-size: 100px;"></h1>
                             <div class="d-flex flex-column">
-                                <span class="h2 mb-0">50$</span>
-                                <span class="h4 text-muted mb-0">kg</span>
+                                <span class="h2 mb-0">FRESH!</span>
+                                <span class="h4 text-muted mb-0"></span>
                             </div>
                         </div>
                     </div>
@@ -785,9 +720,8 @@
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mx-auto mb-5" style="max-width: 700px;">
-                <h1 class="display-4">Bestseller Products</h1>
-                <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which
-                    looks reasonable.</p>
+                <h1 class="display-4">Produk Terlaris</h1>
+                <p>Produk yang kami sajikan langsung dipetik dari perkebunan dan terjamin kesegarannya.</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-6 col-xl-4">
@@ -798,7 +732,7 @@
                                     class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5">Jeruk</a>
                                 <div class="d-flex my-3">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -806,10 +740,10 @@
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
+                                <h4 class="mb-3">Rp52.039</h4>
                                 <a href="#"
                                     class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                             </div>
                         </div>
                     </div>
@@ -822,7 +756,7 @@
                                     class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5">Rasberi</a>
                                 <div class="d-flex my-3">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -830,10 +764,10 @@
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
+                                <h4 class="mb-3">Rp52.039</h4>
                                 <a href="#"
                                     class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                             </div>
                         </div>
                     </div>
@@ -846,7 +780,7 @@
                                     class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5">Pisang</a>
                                 <div class="d-flex my-3">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -854,10 +788,10 @@
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
+                                <h4 class="mb-3">Rp52.039</h4>
                                 <a href="#"
                                     class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                             </div>
                         </div>
                     </div>
@@ -870,7 +804,7 @@
                                     class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5">Aprikot</a>
                                 <div class="d-flex my-3">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -878,10 +812,10 @@
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
+                                <h4 class="mb-3">Rp52.039</h4>
                                 <a href="#"
                                     class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                             </div>
                         </div>
                     </div>
@@ -894,7 +828,7 @@
                                     class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5">Anggur Putih</a>
                                 <div class="d-flex my-3">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -902,10 +836,10 @@
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
+                                <h4 class="mb-3">Rp52.039</h4>
                                 <a href="#"
                                     class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                             </div>
                         </div>
                     </div>
@@ -918,7 +852,7 @@
                                     class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
-                                <a href="#" class="h5">Organic Tomato</a>
+                                <a href="#" class="h5">Apel</a>
                                 <div class="d-flex my-3">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -926,10 +860,10 @@
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h4 class="mb-3">3.12 $</h4>
+                                <h4 class="mb-3">Rp52.039</h4>
                                 <a href="#"
                                     class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                             </div>
                         </div>
                     </div>
@@ -938,7 +872,7 @@
                     <div class="text-center">
                         <img src="{{ asset('img/fruite-item-1.jpg') }}" class="img-fluid rounded" alt="">
                         <div class="py-4">
-                            <a href="#" class="h5">Organic Tomato</a>
+                            <a href="#" class="h5">Jeruk</a>
                             <div class="d-flex my-3 justify-content-center">
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
@@ -946,9 +880,9 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <h4 class="mb-3">3.12 $</h4>
+                            <h4 class="mb-3">Rp52.039</h4>
                             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                    class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                         </div>
                     </div>
                 </div>
@@ -956,7 +890,7 @@
                     <div class="text-center">
                         <img src="{{ asset('img/fruite-item-2.jpg') }}" class="img-fluid rounded" alt="">
                         <div class="py-4">
-                            <a href="#" class="h5">Organic Tomato</a>
+                            <a href="#" class="h5">Rasberi</a>
                             <div class="d-flex my-3 justify-content-center">
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
@@ -964,9 +898,9 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <h4 class="mb-3">3.12 $</h4>
+                            <h4 class="mb-3">Rp52.039</h4>
                             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                    class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                         </div>
                     </div>
                 </div>
@@ -974,7 +908,7 @@
                     <div class="text-center">
                         <img src="{{ asset('img/fruite-item-3.jpg') }}" class="img-fluid rounded" alt="">
                         <div class="py-4">
-                            <a href="#" class="h5">Organic Tomato</a>
+                            <a href="#" class="h5">Pisang</a>
                             <div class="d-flex my-3 justify-content-center">
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
@@ -982,9 +916,9 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <h4 class="mb-3">3.12 $</h4>
+                            <h4 class="mb-3">Rp52.039</h4>
                             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                    class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                         </div>
                     </div>
                 </div>
@@ -992,7 +926,7 @@
                     <div class="text-center">
                         <img src="{{ asset('img/fruite-item-4.jpg') }}" class="img-fluid rounded" alt="">
                         <div class="py-2">
-                            <a href="#" class="h5">Organic Tomato</a>
+                            <a href="#" class="h5">Aprikot</a>
                             <div class="d-flex my-3 justify-content-center">
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
@@ -1000,9 +934,9 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <h4 class="mb-3">3.12 $</h4>
+                            <h4 class="mb-3">Rp52.039</h4>
                             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                    class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
                         </div>
                     </div>
                 </div>
@@ -1020,28 +954,28 @@
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="counter bg-white rounded p-5">
                             <i class="fa fa-users text-secondary"></i>
-                            <h4>satisfied customers</h4>
+                            <h4>Pelanggan Yang Puas</h4>
                             <h1>1963</h1>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="counter bg-white rounded p-5">
                             <i class="fa fa-users text-secondary"></i>
-                            <h4>quality of service</h4>
+                            <h4>Kualitas Pelayanan</h4>
                             <h1>99%</h1>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="counter bg-white rounded p-5">
                             <i class="fa fa-users text-secondary"></i>
-                            <h4>quality certificates</h4>
+                            <h4>Sertifikasi Kualitas</h4>
                             <h1>33</h1>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="counter bg-white rounded p-5">
                             <i class="fa fa-users text-secondary"></i>
-                            <h4>Available Products</h4>
+                            <h4>Produk Tersedia</h4>
                             <h1>789</h1>
                         </div>
                     </div>
@@ -1056,8 +990,8 @@
     <div class="container-fluid testimonial py-5">
         <div class="container py-5">
             <div class="testimonial-header text-center">
-                <h4 class="text-primary">Our Testimonial</h4>
-                <h1 class="display-5 mb-5 text-dark">Our Client Saying!</h1>
+                <h4 class="text-primary">Testimoni Kami</h4>
+                <h1 class="display-5 mb-5 text-dark">Klien Kami Berkata!</h1>
             </div>
             <div class="owl-carousel testimonial-carousel">
                 <div class="testimonial-item img-border-radius bg-light rounded p-4">
@@ -1065,8 +999,8 @@
                         <i class="fa fa-quote-right fa-2x text-secondary position-absolute"
                             style="bottom: 30px; right: 0;"></i>
                         <div class="mb-4 pb-4 border-bottom border-secondary">
-                            <p class="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the
-                                industry's standard dummy text ever since the 1500s,
+                            <p class="mb-0">Produk ini luar biasa, buahnya segar dan rasanya enak sekali. Saya pasti akan
+                                kembali untuk membeli lagi!
                             </p>
                         </div>
                         <div class="d-flex align-items-center flex-nowrap">
@@ -1075,8 +1009,8 @@
                                     style="width: 100px; height: 100px;" alt="">
                             </div>
                             <div class="ms-4 d-block">
-                                <h4 class="text-dark">Client Name</h4>
-                                <p class="m-0 pb-3">Profession</p>
+                                <h4 class="text-dark">Handoko</h4>
+                                <p class="m-0 pb-3">Doctor</p>
                                 <div class="d-flex pe-5">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -1093,8 +1027,7 @@
                         <i class="fa fa-quote-right fa-2x text-secondary position-absolute"
                             style="bottom: 30px; right: 0;"></i>
                         <div class="mb-4 pb-4 border-bottom border-secondary">
-                            <p class="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the
-                                industry's standard dummy text ever since the 1500s,
+                            <p class="mb-0">Pelayanan pelanggan sangat baik dan ramah. Saya merasa dihargai sebagai pelanggan.
                             </p>
                         </div>
                         <div class="d-flex align-items-center flex-nowrap">
@@ -1103,8 +1036,8 @@
                                     style="width: 100px; height: 100px;" alt="">
                             </div>
                             <div class="ms-4 d-block">
-                                <h4 class="text-dark">Client Name</h4>
-                                <p class="m-0 pb-3">Profession</p>
+                                <h4 class="text-dark">Digiedaw</h4>
+                                <p class="m-0 pb-3">Mahasiswa</p>
                                 <div class="d-flex pe-5">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>
@@ -1121,8 +1054,8 @@
                         <i class="fa fa-quote-right fa-2x text-secondary position-absolute"
                             style="bottom: 30px; right: 0;"></i>
                         <div class="mb-4 pb-4 border-bottom border-secondary">
-                            <p class="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the
-                                industry's standard dummy text ever since the 1500s,
+                            <p class="mb-0">Kualitas produk sangat baik, buah-buahan segar dan organik. Saya merasa lebih sehat setelah
+                                mengonsumsinya.
                             </p>
                         </div>
                         <div class="d-flex align-items-center flex-nowrap">
@@ -1131,8 +1064,8 @@
                                     style="width: 100px; height: 100px;" alt="">
                             </div>
                             <div class="ms-4 d-block">
-                                <h4 class="text-dark">Client Name</h4>
-                                <p class="m-0 pb-3">Profession</p>
+                                <h4 class="text-dark">Mas Joko</h4>
+                                <p class="m-0 pb-3">Kritikus</p>
                                 <div class="d-flex pe-5">
                                     <i class="fas fa-star text-primary"></i>
                                     <i class="fas fa-star text-primary"></i>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 @include('assets.head')
 
 <body>
@@ -7,10 +7,10 @@
 
     <!-- Page Header -->
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Shop Detail</h1>
+        <h1 class="text-center text-white display-6">Detail Produk</h1>
         <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('shop') }}">Shop</a></li>
+            <li class="breadcrumb-item"><a href="/">Beranda</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('shop') }}">Belanja</a></li>
             <li class="breadcrumb-item active text-white">{{ $product->name }}</li>
         </ol>
     </div>
@@ -63,7 +63,7 @@
                             <a href="{{ route('cart.add', ['id' => $product->id]) }}"
                                onclick="event.preventDefault(); submitCart();"
                                class="btn border border-secondary rounded-pill px-4 py-2 mb-2 text-primary">
-                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli
                             </a>
 
                             <a href="{{ route('checkout.direct', ['id' => $product->id]) }}"
@@ -88,8 +88,8 @@
                         <div class="col-lg-12">
                             <nav>
                                 <div class="nav nav-tabs mb-3">
-                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#description">Description</button>
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews">Reviews</button>
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#description">Deskripsi</button>
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews">Ulasan</button>
                                 </div>
                             </nav>
                             <div class="tab-content mb-5">
@@ -97,42 +97,42 @@
                                     <p>{{ $product->description }}</p>
                                     <div class="row g-4 mt-4">
                                         <div class="col-6">
-                                            <div class="bg-light text-center py-2 rounded">Weight: 1 kg</div>
+                                            <div class="bg-light text-center py-2 rounded">Berat: 1 kg</div>
                                         </div>
                                         <div class="col-6">
-                                            <div class="text-center py-2 rounded">Quality: Organic</div>
+                                            <div class="text-center py-2 rounded">Kualitas: Organik</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="reviews">
-                                    <p class="text-muted">No reviews yet.</p>
+                                    <p class="text-muted">Belum ada ulasan.</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Comment Form -->
                         <form action="#">
-                            <h4 class="mb-5 fw-bold">Leave a Reply</h4>
+                            <h4 class="mb-5 fw-bold">Tinggalkan Komentar</h4>
                             <div class="row g-4">
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control border-bottom" placeholder="Your Name *">
+                                    <input type="text" class="form-control border-bottom" placeholder="Nama Anda *">
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="email" class="form-control border-bottom" placeholder="Your Email *">
+                                    <input type="email" class="form-control border-bottom" placeholder="Email Anda *">
                                 </div>
                                 <div class="col-lg-12">
-                                    <textarea class="form-control border-bottom my-4" rows="6" placeholder="Your Review *"></textarea>
+                                    <textarea class="form-control border-bottom my-4" rows="6" placeholder="Ulasan Anda *"></textarea>
                                 </div>
                                 <div class="col-lg-12 d-flex justify-content-between py-3 mb-5">
                                     <div class="d-flex align-items-center">
-                                        <p class="mb-0 me-3">Please rate:</p>
+                                        <p class="mb-0 me-3">Silakan beri rating:</p>
                                         <div class="d-flex align-items-center">
                                             @for ($i = 0; $i < 5; $i++)
                                                 <i class="fa fa-star text-muted"></i>
                                             @endfor
                                         </div>
                                     </div>
-                                    <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3">Post Comment</a>
+                                    <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3">Kirim Komentar</a>
                                 </div>
                             </div>
                         </form>

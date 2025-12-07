@@ -195,6 +195,7 @@
                     <div class="bg-white shadow rounded-lg p-6">
                         <form action="{{ route('admin.orders.updateShipping', $order->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div style="margin-bottom: 1rem;">
                                 <label for="shipping_status"
                                     style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem; font-weight: 500; color: #374151;">

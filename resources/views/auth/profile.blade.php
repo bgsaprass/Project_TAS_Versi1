@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 @include('assets.head')
 
 <body>
@@ -15,16 +15,16 @@
                             class="text-white">CepatBeli@gmail.com</a></small>
                 </div>
                 <div class="top-link pe-2">
-                    <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                    <a href="#" class="text-white"><small class="text-white mx-2">Kebijakan Privasi</small>/</a>
+                    <a href="#" class="text-white"><small class="text-white mx-2">Syarat Penggunaan</small>/</a>
+                    <a href="#" class="text-white"><small class="text-white ms-2">Penjualan & Pengembalian</small></a>
                 </div>
             </div>
         </div>
         <div class="container px-0">
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                <a href="{{ route('welcome') }}" class="navbar-brand">
-                    <h1 class="text-primary display-6">Fruitables</h1>
+                    <a href="{{ route('welcome') }}" class="navbar-brand">
+                    <h1 class="text-primary display-6">CepatBeli</h1>
                 </a>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -32,13 +32,13 @@
                 </button>
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
-                        <a href="{{ route('welcome') }}" class="nav-item nav-link active">Home</a>
-                        <a href="{{ route('shop') }}" class="nav-item nav-link">Shop</a>
-                        <a href="{{ route('shop') }}" class="nav-item nav-link">Shop Detail</a>
+                        <a href="{{ route('welcome') }}" class="nav-item nav-link active">Beranda</a>
+                        <a href="{{ route('shop') }}" class="nav-item nav-link">Belanja</a>
+                        <a href="{{ route('shop') }}" class="nav-item nav-link">Detail Produk</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="contact.html" class="nav-item nav-link">Kontak</a>
                     </div>
                     <div class="d-flex m-3 me-0">
                         <button
@@ -47,8 +47,8 @@
                             <i class="fas fa-search text-primary"></i>
                         </button>
 
-                        @guest
-                            <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Login</a>
+                            @guest
+                            <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Masuk</a>
                             <a href="{{ route('register') }}" class="btn btn-primary">Buat Akun</a>
                         @else
                             @if (Auth::user()->role === 'admin')
@@ -75,11 +75,11 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                                    <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}">Profil</a></li>
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
-                                            <button class="dropdown-item" type="submit">Logout</button>
+                                            <button class="dropdown-item" type="submit">Keluar</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -144,7 +144,7 @@
 <script>
     Swal.fire({
         icon: 'error',
-        title: 'Oops!',
+        title: 'Terjadi Kesalahan',
         text: '{{ session('error') }}',
         confirmButtonColor: '#d33'
     });

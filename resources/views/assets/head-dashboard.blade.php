@@ -1,11 +1,8 @@
 <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Get started with a free and open source Tailwind CSS dashboard featuring a sidebar layout, advanced charts, and hundreds of components based on Flowbite">
-<meta name="author" content="Themesberg">
-<meta name="generator" content="Hugo 0.143.0">
 
-<title>Tailwind CSS Products Page - Windster</title>
+<title>CepatBeli - Admin Page</title>
 
 <link rel="canonical" href="https://themesberg.com/product/tailwind-css/dashboard-windster">
 
@@ -23,23 +20,6 @@
 <link rel="mask-icon" href="https://themewagon.github.io/windster/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
-<!-- Twitter -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@">
-<meta name="twitter:creator" content="@">
-<meta name="twitter:title" content="Tailwind CSS Products Page - Windster">
-<meta name="twitter:description" content="Get started with a free and open source Tailwind CSS dashboard featuring a sidebar layout, advanced charts, and hundreds of components based on Flowbite">
-<meta name="twitter:image" content="https://themewagon.github.io/docs/images/og-image.jpg">
-
-<!-- Facebook -->
-<meta property="og:url" content="https://themewagon.github.io/windster/e-commerce/products/">
-<meta property="og:title" content="Tailwind CSS Products Page - Windster">
-<meta property="og:description" content="Get started with a free and open source Tailwind CSS dashboard featuring a sidebar layout, advanced charts, and hundreds of components based on Flowbite">
-<meta property="og:type" content="article">
-<meta property="og:image" content="https://themewagon.github.io/docs/images/og-image.jpg">
-<meta property="og:image:type" content="image/png">
-
-
 
 
 

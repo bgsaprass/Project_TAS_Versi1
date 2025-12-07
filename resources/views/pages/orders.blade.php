@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 
 @include('assets.head')
 
@@ -45,7 +45,7 @@
         <script>
             Swal.fire({
                 icon: 'success',
-                title: 'Success!',
+                title: 'Berhasil',
                 text: '{{ session('success') }}',
                 confirmButtonColor: '#6f42c1',
                 confirmButtonText: 'OK'

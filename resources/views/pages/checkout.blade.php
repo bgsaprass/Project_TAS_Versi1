@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 @include('assets.head')
 
 <body>
@@ -13,12 +13,12 @@
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Cari berdasarkan kata kunci</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex align-items-center">
                     <div class="input-group w-75 mx-auto d-flex">
-                        <input type="search" class="form-control p-3" placeholder="keywords"
+                        <input type="search" class="form-control p-3" placeholder="kata kunci"
                             aria-describedby="search-icon-1">
                         <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
                     </div>
@@ -30,18 +30,18 @@
 
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Checkout</h1>
+        <h1 class="text-center text-white display-6">Pembayaran</h1>
         <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Checkout</li>
+            <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+            <li class="breadcrumb-item"><a href="#">Halaman</a></li>
+            <li class="breadcrumb-item active text-white">Pembayaran</li>
         </ol>
     </div>
     <!-- Single Page Header End -->
 
     <div class="container-fluid py-5">
         <div class="container py-5">
-            <h1 class="mb-4">Billing details</h1>
+            <h1 class="mb-4">Rincian Pembayaran</h1>
 
             <form method="POST" action="{{ route('checkout.process') }}">
                 @csrf
@@ -165,7 +165,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100 py-3 text-uppercase">Place Order</button>
+                        <button type="submit" class="btn btn-primary w-100 py-3 text-uppercase">Pesan Sekarang</button>
                     </div>
                 </div>
             </form>
@@ -232,7 +232,7 @@
         <script>
             Swal.fire({
                 icon: 'error',
-                title: 'Oops!',
+                title: 'Terjadi Kesalahan',
                 text: '{{ session('error') }}',
                 confirmButtonColor: '#d33',
                 confirmButtonText: 'Coba Lagi'

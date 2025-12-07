@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 @include('assets.head')
 
@@ -16,12 +16,12 @@
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content rounded-0">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Cari berdasarkan kata kunci</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body d-flex align-items-center">
                         <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                            <input type="search" class="form-control p-3" placeholder="kata kunci" aria-describedby="search-icon-1">
                             <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
@@ -33,11 +33,11 @@
 
         <!-- Single Page Header start -->
         <div class="container-fluid page-header py-5">
-            <h1 class="text-center text-white display-6">Contact</h1>
+            <h1 class="text-center text-white display-6">Kontak</h1>
             <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item active text-white">Contact</li>
+                <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="#">Halaman</a></li>
+                <li class="breadcrumb-item active text-white">Kontak</li>
             </ol>
         </div>
         <!-- Single Page Header End -->
@@ -50,8 +50,8 @@
                     <div class="row g-4">
                         <div class="col-12">
                             <div class="text-center mx-auto" style="max-width: 700px;">
-                                <h1 class="text-primary">Get in touch</h1>
-                                <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+                                <h1 class="text-primary">Hubungi Kami</h1>
+                                <p class="mb-4">Form kontak saat ini tidak aktif. Jika ingin form yang berfungsi lengkap dengan Ajax & PHP, Anda dapat menyesuaikan kode dan mengaktifkannya. <a href="https://htmlcodex.com/contact-form">Pelajari lebih lanjut</a>.</p>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -63,32 +63,32 @@
                         </div>
                         <div class="col-lg-7">
                             <form action="" class="">
-                                <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name">
-                                <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email">
-                                <textarea class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Your Message"></textarea>
-                                <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary " type="submit">Submit</button>
+                                <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Nama Anda">
+                                <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Masukkan Email Anda">
+                                <textarea class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Pesan Anda"></textarea>
+                                <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary " type="submit">Kirim</button>
                             </form>
                         </div>
                         <div class="col-lg-5">
                             <div class="d-flex p-4 rounded mb-4 bg-white">
                                 <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
                                 <div>
-                                    <h4>Address</h4>
-                                    <p class="mb-2">123 Street New York.USA</p>
+                                    <h4>Alamat</h4>
+                                    <p class="mb-2">1 Diponegoro, Salatiga</p>
                                 </div>
                             </div>
                             <div class="d-flex p-4 rounded mb-4 bg-white">
                                 <i class="fas fa-envelope fa-2x text-primary me-4"></i>
                                 <div>
-                                    <h4>Mail Us</h4>
-                                    <p class="mb-2">info@example.com</p>
+                                    <h4>Email</h4>
+                                    <p class="mb-2">CepatBeli@gmail.com</p>
                                 </div>
                             </div>
                             <div class="d-flex p-4 rounded bg-white">
                                 <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
                                 <div>
-                                    <h4>Telephone</h4>
-                                    <p class="mb-2">(+012) 3456 7890</p>
+                                    <h4>Telepon</h4>
+                                    <p class="mb-2">+0123 4567 8910</p>
                                 </div>
                             </div>
                         </div>
@@ -106,14 +106,14 @@
                     <div class="row g-4">
                         <div class="col-lg-3">
                             <a href="#">
-                                <h1 class="text-primary mb-0">Fruitables</h1>
-                                <p class="text-secondary mb-0">Fresh products</p>
+                                <h1 class="text-primary mb-0">CepatBeli</h1>
+                                <p class="text-secondary mb-0">Produk Segar</p>
                             </a>
                         </div>
                         <div class="col-lg-6">
                             <div class="position-relative mx-auto">
-                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Your Email">
-                                <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Subscribe Now</button>
+                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="email" placeholder="Email Anda">
+                                <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Berlangganan Sekarang</button>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -129,41 +129,40 @@
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
-                            <h4 class="text-light mb-3">Why People Like us!</h4>
-                            <p class="mb-4">typesetting, remaining essentially unchanged. It was
-                                popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
-                            <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
+                            <h4 class="text-light mb-3">Kenapa Orang Menyukai Kami!</h4>
+                            <p class="mb-4">Pelanggan menyukai kami karena komitmen menghadirkan produk segar dan terpercaya langsung dari sumbernya.</p>
+                            <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Baca Lebih Banyak</a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-column text-start footer-item">
-                            <h4 class="text-light mb-3">Shop Info</h4>
-                            <a class="btn-link" href="">About Us</a>
-                            <a class="btn-link" href="">Contact Us</a>
-                            <a class="btn-link" href="">Privacy Policy</a>
-                            <a class="btn-link" href="">Terms & Condition</a>
-                            <a class="btn-link" href="">Return Policy</a>
-                            <a class="btn-link" href="">FAQs & Help</a>
+                            <h4 class="text-light mb-3">Info Toko</h4>
+                            <a class="btn-link" href="">Tentang Kami</a>
+                            <a class="btn-link" href="">Kontak Kami</a>
+                            <a class="btn-link" href="">Kebijakan Privasi</a>
+                            <a class="btn-link" href="">Syarat & Ketentuan</a>
+                            <a class="btn-link" href="">Peraturan Pengembalian</a>
+                            <a class="btn-link" href="">FAQ & Bantuan</a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-column text-start footer-item">
-                            <h4 class="text-light mb-3">Account</h4>
-                            <a class="btn-link" href="">My Account</a>
-                            <a class="btn-link" href="">Shop details</a>
-                            <a class="btn-link" href="">Shopping Cart</a>
-                            <a class="btn-link" href="">Wishlist</a>
-                            <a class="btn-link" href="">Order History</a>
-                            <a class="btn-link" href="">International Orders</a>
+                            <h4 class="text-light mb-3">Akun</h4>
+                            <a class="btn-link" href="">Akun Saya</a>
+                            <a class="btn-link" href="">Detail Toko</a>
+                            <a class="btn-link" href="">Keranjang Belanja</a>
+                            <a class="btn-link" href="">Daftar Keinginan</a>
+                            <a class="btn-link" href="">Riwayat Pesanan</a>
+                            <a class="btn-link" href="">Pesanan Internasional</a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
-                            <h4 class="text-light mb-3">Contact</h4>
-                            <p>Address: 1 Diponegoro, Salatiga</p>
+                            <h4 class="text-light mb-3">Kontak</h4>
+                            <p>Alamat: 1 Diponegoro, Salatiga</p>
                             <p>Email: CepatBeli@gmail.com</p>
-                            <p>Phone: +0123 4567 8910</p>
-                            <p>Payment Accepted</p>
+                            <p>Telepon: +0123 4567 8910</p>
+                            <p>Pembayaran Yang Diterima</p>
                             <img src="img/payment.png" class="img-fluid" alt="">
                         </div>
                     </div>
@@ -177,7 +176,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+                        <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>CepatBeli</a>, Seluruh hak cipta dilindungi.</span>
                     </div>
                     <div class="col-md-6 my-auto text-center text-md-end text-white">
                         <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
