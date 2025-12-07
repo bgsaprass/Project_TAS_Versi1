@@ -154,13 +154,10 @@ Route::post('/address/store', [AddressController::class, 'store'])->middleware('
 // =======================
 
 Route::prefix('admin')
-    ->middleware(['auth', \App\Http\Middleware\IsAdmin::class]) // panggil alias middleware, jangan import class di web.php
-    ->name('admin.')
-    ->group(function () {
-        // Dashboard
+    ->middleware(['auth', \App\Http\Middleware\IsAdmin::class])->name('admin.')->group(function () {
+
         Route::get('/dashboard', [AdminController::class, 'index'])->name('index');
 
-        // Products (resourceful)
         Route::resource('products', ProductController::class);
 
         // Users (resourceful)
@@ -170,6 +167,10 @@ Route::prefix('admin')
         Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
         Route::get('/orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
         Route::put('/orders/{order}/update-status', [\App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+        Route::get('/users/{user}/orders', [\App\Http\Controllers\Admin\OrderController::class, 'userOrders']) ->name('users.orders');
+        Route::put('/orders/{order}/update-shipping', [\App\Http\Controllers\Admin\OrderController::class, 'updateShipping'])->name('orders.updateShipping');
+
+
 
         // Reports & Sales
         Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
