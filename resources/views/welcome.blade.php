@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Fruitables - Vegetable Website Template</title>
+    <title>CepatBeli - Supermarket Online Keluarga</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -56,7 +56,7 @@
                 <div class="top-link pe-2">
                     <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
                     <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                    <a href="#" class="text-white"><small class="text-white ms-2">Penjualan dan Pengembalian</small></a>
                 </div>
             </div>
         </div>
@@ -71,19 +71,16 @@
                 </button>
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
-                        <a href="{{ route('welcome') }}" class="nav-item nav-link active">Home</a>
-                        <a href="{{ route('shop') }}" class="nav-item nav-link">Shop</a>
-                        <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
+                        <a href="{{ route('welcome') }}" class="nav-item nav-link active">Beranda</a>
+                        <a href="{{ route('shop') }}" class="nav-item nav-link">Produk</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Halaman</a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a href="cart.html" class="dropdown-item">Cart</a>
+                                <a href="cart.html" class="dropdown-item">Keranjang</a>
                                 <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
                             </div>
                         </div>
-                        <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
+                        <a href="{{ route('contact') }}" class="nav-item nav-link">Kontak</a>
                     </div>
                     <div class="d-flex m-3 me-0">
                         <button
@@ -146,7 +143,7 @@
                             type="number" placeholder="Search">
                         <button type="submit"
                             class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
-                            style="top: 0; right: 25%;">Submit Now</button>
+                            style="top: 0; right: 25%;">Cari</button>
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-5">
@@ -191,8 +188,8 @@
                             <i class="fas fa-car-side fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>Free Shipping</h5>
-                            <p class="mb-0">Free on order over $300</p>
+                            <h5>Pengiriman Gratis</h5>
+                            <p class="mb-0">Gratis untuk pesanan lebih dari $300</p>
                         </div>
                     </div>
                 </div>
@@ -202,8 +199,8 @@
                             <i class="fas fa-user-shield fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>Security Payment</h5>
-                            <p class="mb-0">100% security payment</p>
+                            <h5>Keamanan Pembayaran</h5>
+                            <p class="mb-0">Jaminan Keamanan 100%</p>
                         </div>
                     </div>
                 </div>
@@ -213,8 +210,8 @@
                             <i class="fas fa-exchange-alt fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>30 Day Return</h5>
-                            <p class="mb-0">30 day money guarantee</p>
+                            <h5>30 Hari Pengembalian</h5>
+                            <p class="mb-0">Garansi uang kembali jika barang tidak dikirim dalam 30 hari</p>
                         </div>
                     </div>
                 </div>
@@ -224,8 +221,8 @@
                             <i class="fa fa-phone-alt fa-3x text-white"></i>
                         </div>
                         <div class="featurs-content text-center">
-                            <h5>24/7 Support</h5>
-                            <p class="mb-0">Support every time fast</p>
+                            <h5>Dukungan 24/7</h5>
+                            <p class="mb-0">Dukungan Selalu Hadir Setiap Saat</p>
                         </div>
                     </div>
                 </div>
