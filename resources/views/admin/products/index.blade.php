@@ -197,7 +197,7 @@
                                     @if ($product->remaining_stock == 0)
                                         <span class="text-red-600 font-semibold">Habis</span>
                                     @else
-                                        {{ $product->remaining_stock }} / {{ $product->stock }}
+                                        {{ $product->stock }} / {{ $product->remaining_stock }}
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
