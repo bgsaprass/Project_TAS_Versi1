@@ -243,13 +243,12 @@
                     </tbody>
                 </table>
 
-                <div class="mt-4">
+                {{-- <div class="mt-4">
                     {{ $products->links() }}
-                </div>
+                </div> --}}
 
                 {{-- Table End --}}
-                <div
-                    class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
+                <div class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
                     <div class="flex items-center mb-4 sm:mb-0">
                         @if ($products->onFirstPage())
                             <span class="text-gray-400 cursor-not-allowed p-1 rounded inline-flex justify-center">
