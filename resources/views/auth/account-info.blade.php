@@ -97,105 +97,83 @@
     <main class="container mt-5 pt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="profile-card p-4 shadow rounded bg-white">
-                    <h2 class="mb-4 text-center">Profil Akun</h2>
+                <div class="p-4 shadow rounded bg-white">
+                    <h2 class="mb-4 text-center">Informasi Akun</h2>
 
-                    <div class="text-center mb-4">
-                        <i class="fa fa-user-circle fa-4x text-success mb-3"></i>
-                        <h5 class="mb-1">{{ Auth::user()->name }}</h5>
-                        <p class="text-muted">{{ Auth::user()->email }}</p>
-                        @if (Auth::user()->phone)
-                            <p class="text-muted">{{ Auth::user()->phone }}</p>
-                        @endif
-                    </div>
-
-                    <hr>
-
-                    <div class="mb-4">
-                        <h6 class="info-label">Pesanan Terakhir</h6>
-                        <p class="text-muted">Belum ada pesanan atau data belum tersedia.</p>
-                    </div>
-
-                    <div class="d-grid gap-2">
-                        @if (Auth::user()->role === 'admin')
-                            {{-- Tombol khusus admin --}}
-                            <a href="{{ route('admin.index') }}" class="btn btn-outline-dark">
-                                <i class="fa fa-chart-line me-2"></i> Lihat Statistik Penjualan
-                            </a>
-                        @else
-                            {{-- Tombol untuk user biasa --}}
-                            <a href="{{ route('orders') }}" class="btn btn-outline-success">
-                                <i class="fa fa-box me-2"></i> Lihat Pesanan Saya
-                            </a>
-
-                            <!-- Tombol Informasi Akun -->
-                            <a href="{{ route('account.info') }}" class="btn btn-outline-primary">
-                                <i class="fa fa-info-circle me-2"></i> Informasi Akun
-                            </a>
-
-
-                            <div class="collapse mt-3" id="accountInfo">
-                                <div class="card card-body">
-                                    <!-- Ubah Sandi -->
-                                    <a href="{{ route('password.change') }}" class="btn btn-outline-warning mb-2">
-                                        <i class="fa fa-key me-2"></i> Ubah Sandi
-                                    </a>
-
-                                    <!-- Alamat -->
-                                    <h6 class="mb-1">Alamat Tersimpan:</h6>
-
-                                    @if (Auth::user()->addresses->count())
-                                        @foreach (Auth::user()->addresses as $address)
-                                            <div class="mb-3 p-2 border rounded">
-                                                <p class="text-muted mb-1">
-                                                    <strong>{{ $address->recipient_name }}</strong><br>
-                                                    {{ $address->address }}, {{ $address->city }}
-                                                    {{ $address->postcode }}<br>
-                                                    {{ $address->country }} | {{ $address->phone }}
-                                                </p>
-                                                <div class="d-flex gap-2">
-                                                    <a href="{{ route('address.edit', $address->id) }}"
-                                                        class="btn btn-sm btn-outline-secondary">
-                                                        <i class="fa fa-edit me-1"></i> Edit
-                                                    </a>
-                                                    <form action="{{ route('address.destroy', $address->id) }}"
-                                                        method="POST"
-                                                        onsubmit="return confirm('Yakin hapus alamat ini?')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-outline-danger">
-                                                            <i class="fa fa-trash me-1"></i> Hapus
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <p class="text-muted">Belum ada alamat tersimpan.</p>
-                                    @endif
-
-                                    <!-- Tombol tambah alamat selalu ada -->
-                                    <a href="{{ route('address.create') }}" class="btn btn-outline-primary mt-2">
-                                        <i class="fa fa-plus me-2"></i> Tambah Alamat
-                                    </a>
-
-                                </div>
-                            </div>
-
-                        @endif
-
-                        <form method="POST" action="{{ route('logout') }}">
+                    <div class="mb-3">
+                        <h5>Nama</h5>
+                        <form method="POST" action="{{ route('profile.updateName') }}" class="d-flex gap-2">
                             @csrf
-                            <button type="submit" class="btn btn-green">
-                                <i class="fa fa-sign-out-alt me-2"></i> Logout
-                            </button>
+                            @method('PUT')
+                            <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}"
+                                required>
+                            <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
                         </form>
                     </div>
 
+                    <div class="mb-3">
+                        <h5>Email</h5>
+                        <p>{{ Auth::user()->email }}</p>
+                    </div>
+
+                    @if (Auth::user()->phone)
+                        <div class="mb-3">
+                            <h5>Nomor HP</h5>
+                            <p>{{ Auth::user()->phone }}</p>
+                        </div>
+                    @endif
+
+                    <hr>
+
+                    <!-- Ubah Sandi -->
+                    <a href="{{ route('password.change') }}" class="btn btn-outline-warning mb-3">
+                        <i class="fa fa-key me-2"></i> Ubah Sandi
+                    </a>
+
+                    <!-- Alamat -->
+                    <h5 class="mt-4">Alamat Tersimpan</h5>
+
+                    @if (Auth::user()->addresses->count())
+                        @foreach (Auth::user()->addresses as $address)
+                            <div class="mb-3 p-3 border rounded">
+                                <p class="mb-1 text-muted">
+                                    <strong>{{ $address->recipient_name }}</strong><br>
+                                    {{ $address->address }}, {{ $address->city }} {{ $address->postcode }}<br>
+                                    {{ $address->country }} | {{ $address->phone }}
+                                </p>
+                                <div class="d-flex gap-2">
+                                    <a href="{{ route('address.edit', $address->id) }}"
+                                        class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa fa-edit me-1"></i> Edit
+                                    </a>
+                                    <form action="{{ route('address.destroy', $address->id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin ingin menghapus alamat ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="fa fa-trash me-1"></i> Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <p class="text-muted">Belum ada alamat tersimpan.</p>
+                    @endif
+
+                    <!-- Tombol Tambah Alamat -->
+                    <a href="{{ route('address.create') }}" class="btn btn-outline-primary mt-2">
+                        <i class="fa fa-plus me-2"></i> Tambah Alamat
+                    </a>
+
+                    <a href="{{ route('profile') }}" class="btn btn-outline-secondary mt-3">
+                        <i class="fa fa-arrow-left me-2"></i> Kembali ke Profil
+                    </a>
                 </div>
             </div>
         </div>
     </main>
+
     @if (session('error'))
         <script>
             Swal.fire({

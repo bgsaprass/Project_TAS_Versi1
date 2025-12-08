@@ -16,23 +16,47 @@
 
 
     <!-- Modal Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cari berdasarkan kata kunci</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex align-items-center">
-                    <div class="input-group w-75 mx-auto d-flex">
-                        <input type="search" class="form-control p-3" placeholder="kata kunci"
-                            aria-describedby="search-icon-1">
-                        <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                    </div>
-                </div>
-            </div>
+    <div class="modal-body d-flex align-items-center">
+        <div class="input-group w-75 mx-auto d-flex">
+            <input type="search" id="liveSearch" class="form-control p-3" placeholder="kata kunci">
+            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
         </div>
     </div>
+
+    {{-- Tempat hasil pencarian --}}
+    <div id="searchResults" class="px-4 py-3"></div>
+
+    <script>
+        document.getElementById('liveSearch').addEventListener('keyup', function() {
+            let query = this.value;
+
+            if (query.length > 1) { // minimal 2 huruf
+                fetch(`/search-products?search=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let resultsDiv = document.getElementById('searchResults');
+                        resultsDiv.innerHTML = '';
+
+                        if (data.length > 0) {
+                            data.forEach(product => {
+                                resultsDiv.innerHTML += `
+                            <div class="border-bottom py-2">
+                                <a href="/shop/${product.id}" class="text-decoration-none">
+                                    ${product.name} - Rp${product.price}
+                                </a>
+                            </div>
+                        `;
+                            });
+                        } else {
+                            resultsDiv.innerHTML = '<p class="text-muted">Tidak ada hasil</p>';
+                        }
+                    });
+            } else {
+                document.getElementById('searchResults').innerHTML = '';
+            }
+        });
+    </script>
+
     <!-- Modal Search End -->
 
 
@@ -55,27 +79,35 @@
             <div class="row g-4">
                 <div class="col-lg-12">
                     <div class="row g-4">
-                        <div class="col-xl-3">
-                            <div class="input-group w-100 mx-auto d-flex">
-                                <input type="search" class="form-control p-3" placeholder="kata kunci"
-                                    aria-describedby="search-icon-1">
-                                <span id="search-icon-1" class="input-group-text p-3"><i
-                                        class="fa fa-search"></i></span>
-                            </div>
                         </div>
                         <div class="col-6"></div>
                         <div class="col-xl-3">
-                                <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-                                <label for="fruits">Urutkan:</label>
-                                <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3"
-                                    form="fruitform">
-                                    <option value="volvo">Tidak ada</option>
-                                    <option value="saab">Popularitas</option>
-                                    <option value="opel">Organik</option>
-                                    <option value="audi">Terbaik</option>
-                                </select>
+                            <div
+                                class="bg-light ps-3 py-3 rounded d-flex justify-content-between align-items-center mb-4 shadow-sm">
+                                <label for="sort" class="fw-bold text-secondary mb-0">
+                                    <i class="fa fa-filter me-2 text-primary"></i> Urutkan:
+                                </label>
+                                <form id="productFilterForm" method="GET" action="{{ route('shop') }}">
+                                    <select id="sort" name="sort"
+                                        class="form-select form-select-sm border-0 bg-white rounded-pill px-3 shadow-sm">
+                                        <option value="">Tidak ada</option>
+                                        <option value="price_asc"
+                                            {{ request('sort') == 'price_asc' ? 'selected' : '' }}>💰 Harga Termurah
+                                        </option>
+                                        <option value="price_desc"
+                                            {{ request('sort') == 'price_desc' ? 'selected' : '' }}>💎 Harga Termahal
+                                        </option>
+                                    </select>
+                                </form>
                             </div>
                         </div>
+
+                        <script>
+                            document.getElementById('sort').addEventListener('change', function() {
+                                document.getElementById('productFilterForm').submit();
+                            });
+                        </script>
+
                     </div>
                     <div class="row g-4">
                         <div class="col-lg-3">
@@ -122,8 +154,8 @@
                                             <label for="Categories-4"> Diskon</label>
                                         </div>
                                         <div class="mb-2">
-                                            <input type="radio" class="me-2" id="Categories-5"
-                                                name="Categories-1" value="Beverages">
+                                            <input type="radio" class="me-2" id="Categories-5" name="Categories-1"
+                                                value="Beverages">
                                             <label for="Categories-5"> Kadaluarsa</label>
                                         </div>
                                     </div>
@@ -218,8 +250,11 @@
                                                 style="top: 10px; left: 10px;">
                                                 {{ optional($product->category)->name ?? 'Tanpa Kategori' }}
                                             </div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom position-relative">
-                                                <a href="{{ route('product.detail', $product->id) }}" class="stretched-link" aria-label="Lihat {{ $product->name }}"></a>
+                                            <div
+                                                class="p-4 border border-secondary border-top-0 rounded-bottom position-relative">
+                                                <a href="{{ route('product.detail', $product->id) }}"
+                                                    class="stretched-link"
+                                                    aria-label="Lihat {{ $product->name }}"></a>
                                                 <h4>{{ $product->name }}</h4>
                                                 <p>{{ Str::limit($product->description, 60) }}</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
@@ -252,7 +287,7 @@
     <!-- Footer End -->
 
     <!-- Copyright Start -->
-    @include("assets.copyright")
+    @include('assets.copyright')
     <!-- Copyright End -->
 
 

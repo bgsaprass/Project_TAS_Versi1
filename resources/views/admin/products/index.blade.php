@@ -35,11 +35,11 @@
 @include('assets.head-dashboard')
 
 <body class="bg-gray-50">
-@include('assets.nav-das')
+    @include('assets.nav-das')
 
     <div class="flex overflow-hidden bg-white pt-16">
 
-        @include("assets.aside-das")
+        @include('assets.aside-das')
 
         <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
 
@@ -47,8 +47,7 @@
         <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
             <main>
 
-                <div
-                    class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
+                <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
                     <div class="mb-1 w-full">
                         <div class="mb-4">
                             <nav class="flex mb-5" aria-label="Breadcrumb">
@@ -67,8 +66,8 @@
                                     </li>
                                     <li>
                                         <div class="flex items-center">
-                                            <svg class="w-6 h-6 text-gray-400" fill="currentColor"
-                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd"
                                                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                                     clip-rule="evenodd"></path>
@@ -79,8 +78,8 @@
                                     </li>
                                     <li>
                                         <div class="flex items-center">
-                                            <svg class="w-6 h-6 text-gray-400" fill="currentColor"
-                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd"
                                                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                                     clip-rule="evenodd"></path>
@@ -189,7 +188,9 @@
                         @forelse ($products as $product)
                             <tr class="bg-white border-b">
                                 <td class="px-6 py-4">{{ $product->name }}</td>
-                                <td class="px-6 py-4">{{ optional($product->category)->name ?? $product->category ?? 'Tanpa Kategori' }}</td>
+                                <td class="px-6 py-4">
+                                    {{ optional($product->category)->name ?? ($product->category ?? 'Tanpa Kategori') }}
+                                </td>
                                 <td class="px-6 py-4">{{ $product->brand ?? '-' }}</td>
                                 <td class="px-6 py-4">Rp{{ number_format($product->price) }}</td>
                                 <td class="px-6 py-4">
@@ -204,26 +205,35 @@
                                         <img src="{{ asset('img/' . $product->image) }}" alt="{{ $product->name }}"
                                             style="width:56px; height:56px; object-fit:cover; border-radius:6px; border:1px solid #e5e7eb;">
                                     @else
-                                        <span class="text-gray-400 italic">No image</span>
+                                        <span class="text-gray-400 italic">Tidak Ada Gambar</span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 flex gap-2">
-                                    <button type="button"
-                                        class="text-cyan-600 hover:underline flex items-center gap-1"
-                                        data-modal-toggle="edit-product-modal-{{ $product->id }}">
-                                        ✏️ Edit
-                                    </button>
-
-                                    <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
-                                        onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
-                                        @csrf
-                                        @method('DELETE')
+                                <td class="px-6 py-4">
+                                    <div class="flex gap-2 items-center">
+                                        <!-- Tombol Edit -->
                                         <button type="button"
-                                            data-modal-toggle="delete-product-modal-{{ $product->id }}">
-                                            🗑️ Delete
+                                            class="px-3 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-700 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+                                            data-modal-toggle="edit-product-modal-{{ $product->id }}">
+                                            Edit
                                         </button>
-                                    </form>
+
+                                        <!-- Tombol Hapus -->
+                                        <form action="{{ route('admin.products.destroy', $product->id) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button"
+                                                class="px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:outline-none"
+                                                data-modal-toggle="delete-product-modal-{{ $product->id }}">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
+
+
+
                             </tr>
                         @empty
                             <tr>

@@ -10,26 +10,39 @@ class ShopController extends Controller
 {
     private function filterProducts(Request $request)
     {
-        $products = Product::with('category'); // tambahkan eager loading
+        $products = Product::with('category'); // eager loading kategori
 
+        // Filter kategori
         if ($request->filled('category') && Category::find($request->category)) {
             $products->where('category_id', $request->category);
         }
 
+        // Filter pencarian
         if ($request->filled('search')) {
             $products->where('name', 'like', '%' . $request->search . '%');
         }
 
-        if ($request->sort === 'price_asc') {
-            $products->orderBy('price', 'asc');
-        } elseif ($request->sort === 'price_desc') {
-            $products->orderBy('price', 'desc');
+        // Sortir produk
+        switch ($request->sort) {
+            case 'popular':
+                $products->orderBy('views', 'desc'); // atau jumlah order
+                break;
+            case 'best':
+                $products->orderBy('rating', 'desc'); // rating tertinggi
+                break;
+            case 'price_asc':
+                $products->orderBy('price', 'asc'); // harga termurah
+                break;
+            case 'price_desc':
+                $products->orderBy('price', 'desc'); // harga termahal
+                break;
+            case 'newest':
+                $products->orderBy('created_at', 'desc'); // produk terbaru
+                break;
         }
 
-        return $products->get();
+        return $products->paginate(12); // gunakan paginate agar lebih rapi
     }
-
-
 
     public function index(Request $request)
     {
@@ -68,5 +81,24 @@ class ShopController extends Controller
     public function detail($id)
     {
         return $this->show($id);
+    }
+    public function searchAjax(Request $request)
+    {
+        $products = Product::with('category')
+            ->where('name', 'like', '%' . $request->search . '%')
+            ->limit(10)
+            ->get(['id', 'name', 'description', 'price', 'image', 'category_id'])
+            ->map(function ($product) {
+                return [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'description' => $product->description,
+                    'price' => $product->price,
+                    'image' => $product->image,
+                    'category_name' => optional($product->category)->name,
+                ];
+            });
+
+        return response()->json($products);
     }
 }

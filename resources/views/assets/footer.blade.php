@@ -51,7 +51,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="d-flex flex-column text-start footer-item">
                     <h4 class="text-light mb-3">Akun</h4>
-                    <a class="btn-link" href="">Akun Saya</a>
+                    <a href="{{ route("profile")}}" class="btn-link" >Akun Saya</a>
                     <a class="btn-link" href="">Keranjang Belanja</a>
                     <a class="btn-link" href="">Riwayat Pembelian</a>
                 </div>

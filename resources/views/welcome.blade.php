@@ -310,7 +310,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="tab-2" class="tab-pane fade show p-0">
+                    {{-- <div id="tab-2" class="tab-pane fade show p-0">
                         <div class="row g-4">
                             <div class="col-lg-12">
                                 <div class="row g-4">
@@ -530,7 +530,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -592,94 +592,41 @@
 
     <!-- Vesitable Shop Start-->
     <div class="container vesitable py-5">
-        <h1 class="mb-0">Sayuran Organik Segar</h1>
-        <div class="owl-carousel vegetable-carousel">
+    <h1 class="mb-0">Produk Terbaru Kami</h1>
+    <div class="owl-carousel vegetable-carousel">
+        @foreach ($products as $product)
             <div class="border border-primary rounded position-relative vesitable-item">
                 <div class="vesitable-img">
-                    <img src="{{ asset('img/vegetable-item-6.jpg') }}" class="img-fluid w-100 rounded-top"
-                        alt="">
+                    <img src="{{ asset('img/' . $product->image) }}"
+                         class="img-fluid w-100 rounded-top"
+                         alt="{{ $product->name }}">
                 </div>
                 <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Sayuran</div>
+                     style="top: 10px; right: 10px;">
+                    {{ optional($product->category)->name ?? 'Tanpa Kategori' }}
+                </div>
                 <div class="p-4 rounded-bottom">
-                    <p>Parsley (peterseli) adalah herba aromatik Mediterania yang umum digunakan sebagai hiasan (garnish) atau bumbu masakan.</p>
+                    <h4>{{ $product->name }}</h4>
+                    <p>{{ Str::limit($product->description, 80) }}</p>
                     <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">Rp199.817 / kg</p>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
+                        <p class="text-dark fs-5 fw-bold mb-0">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
+                        <a href="{{ route('cart.add', $product->id) }}"
+                           class="btn border border-secondary rounded-pill px-3 text-primary">
+                            <i class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-                <div class="vesitable-img">
-                    <img src="{{ asset('img/vegetable-item-1.jpg') }}" class="img-fluid w-100 rounded-top"
-                        alt="">
-                </div>
-                <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Sayuran</div>
-                <div class="p-4 rounded-bottom">
-                    <h4>Tomat</h4>
-                    <p>Tomat adalah buah serbaguna berwarna merah cerah yang digunakan sebagai sayuran dalam masakan sehari-hari.</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">Rp159.954 / kg</p>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
-                    </div>
-                </div>
+        @endforeach
+
+        @if (isset($products) && $products->isEmpty())
+            <div class="border border-primary rounded p-4 text-center">
+                <p class="text-muted">Tidak Ada Produk.</p>
             </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-                <div class="vesitable-img">
-                    <img src="{{ asset('img/vegetable-item-3.png') }}" class="img-fluid w-100 rounded-top bg-light"
-                        alt="">
-                </div>
-                <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Buah</div>
-                <div class="p-4 rounded-bottom">
-                    <h4>Pisang</h4>
-                    <p>Pisang adalah buah tropis populer berkulit kuning (saat matang) dan berdaging lembut yang tumbuh dalam tandan besar.</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">Rp83.229 / kg</p>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
-                    </div>
-                </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-                <div class="vesitable-img">
-                    <img src="{{ asset('img/vegetable-item-4.jpg') }}" class="img-fluid w-100 rounded-top"
-                        alt="">
-                </div>
-                <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Sayuran</div>
-                <div class="p-4 rounded-bottom">
-                    <h4>Paprika</h4>
-                    <p>Paprika adalah sejenis cabai besar yang memiliki rasa manis, terdapat 3 warna yaitu merah, kuning, hijau dan berbentuk lonceng.</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">Rp74.890 / kg</p>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
-                    </div>
-                </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-                <div class="vesitable-img">
-                    <img src="{{ asset('img/vegetable-item-5.jpg') }}" class="img-fluid w-100 rounded-top"
-                        alt="">
-                </div>
-                <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
-                    style="top: 10px; right: 10px;">Sayuran</div>
-                <div class="p-4 rounded-bottom">
-                    <h4>Kentang</h4>
-                    <p>Kentang adalah umbi batang bertepung dari tanaman Solanum tuberosum, sering digunakan sebagai makanan pokok</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">Rp40.030 / kg</p>
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i> Tambahkan ke Troli</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endif
     </div>
+</div>
+
 
     <!-- Vesitable Shop End -->
 
@@ -717,7 +664,7 @@
 
 
     <!-- Bestsaler Product Start -->
-    <div class="container-fluid py-5">
+    {{-- <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mx-auto mb-5" style="max-width: 700px;">
                 <h1 class="display-4">Produk Terlaris</h1>
@@ -942,7 +889,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Bestsaler Product End -->
 
 

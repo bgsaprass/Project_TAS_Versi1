@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+
 
 class AuthController extends Controller
 {
@@ -71,4 +74,27 @@ class AuthController extends Controller
 
         return redirect('/login');
     }
+    public function changeForm()
+    {
+        return view('auth.change-password');
+    }
+   public function changePassword(Request $request)
+{
+    $request->validate([
+        'current_password' => 'required',
+        'new_password'     => 'required|min:6|confirmed',
+    ]);
+
+    $user = User::findOrFail(Auth::id()); // ambil ulang sebagai model Eloquent
+
+    if (!Hash::check($request->current_password, $user->password)) {
+        return back()->withErrors(['current_password' => 'Password lama salah']);
+    }
+
+    $user->password = Hash::make($request->new_password);
+    $user->save(); // sekarang pasti dikenali IDE dan jalan
+
+    return redirect()->route('profile')->with('success', 'Password berhasil diubah');
+}
+
 }
