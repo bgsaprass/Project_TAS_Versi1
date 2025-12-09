@@ -12,9 +12,7 @@ use App\Models\Cart;
 
 class CheckoutController extends Controller
 {
-    /**
-     * Checkout page: builds the cart payload for the view
-     */
+
     public function index()
     {
         $user = Auth::user();
@@ -23,13 +21,13 @@ class CheckoutController extends Controller
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // 1) Legacy: selected checkout items from session
+
         if (session('checkout_items')) {
             $cart = session('checkout_items'); // associative array
             return view('pages.checkout', compact('cart'));
         }
 
-        // 2) Legacy: direct checkout (single product) from session
+
         $data = session('checkout.direct');
         if ($data) {
             $product = Product::find($data['product_id']);
@@ -50,7 +48,7 @@ class CheckoutController extends Controller
             ]);
         }
 
-        // 3) Default: pull items from database cart
+
         $cart = Cart::firstOrCreate(['user_id' => $user->id]);
         $items = $cart->items()->with('product')->get();
 
@@ -58,7 +56,7 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', 'Tidak ada produk untuk checkout.');
         }
 
-        // Build array compatible with legacy checkout view
+
         $cartArray = [];
         foreach ($items as $item) {
             if (!$item->product) continue;
@@ -74,9 +72,7 @@ class CheckoutController extends Controller
         return view('pages.checkout', ['cart' => $cartArray]);
     }
 
-    /**
-     * Direct checkout entry-point: stores product+qty to session then redirects to checkout
-     */
+
     public function direct(Request $request, $id)
     {
         $product  = Product::findOrFail($id);
@@ -98,9 +94,7 @@ class CheckoutController extends Controller
         return redirect()->route('checkout');
     }
 
-    /**
-     * Process: validates minimal fields, stores address_id, redirects to chosen payment page
-     */
+
     public function process(Request $request)
     {
         $request->validate([
@@ -108,10 +102,10 @@ class CheckoutController extends Controller
             'payment_method' => 'required|in:bank,cod,ewallet',
         ]);
 
-        // Keep address_id in session for finalize step
+
         session(['checkout.address_id' => $request->address_id]);
 
-        // If no legacy selected items cached, ensure items are present by caching now from cart/direct
+
         if (!session('checkout_items')) {
             $items = $this->buildCheckoutItemsFromSources(Auth::user());
             if (empty($items)) {
@@ -120,14 +114,12 @@ class CheckoutController extends Controller
             session(['checkout_items' => $items]);
         }
 
-        // Redirect to specific payment page
+
         $method = $request->input('payment_method');
         return redirect()->route('checkout.' . $method);
     }
 
-    /**
-     * Finalize: actually creates order + order items, updates stock, clears cart/session
-     */
+
     public function finalize(Request $request)
     {
         $user       = Auth::user();
@@ -139,7 +131,7 @@ class CheckoutController extends Controller
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
         if (empty($items)) {
-            // Fallback: rebuild items if session expired
+
             $items = $this->buildCheckoutItemsFromSources($user);
             if (empty($items)) {
                 return redirect()->route('cart.index')->with('error', 'Tidak ada produk untuk checkout.');
@@ -154,7 +146,7 @@ class CheckoutController extends Controller
 
         DB::beginTransaction();
         try {
-            // Compute totals
+
             $subtotal = 0;
             foreach ($items as $it) {
                 $qty    = (int) ($it['quantity'] ?? 1);
@@ -164,7 +156,7 @@ class CheckoutController extends Controller
             $shippingCost = 10000;
             $total        = $subtotal + $shippingCost;
 
-            // Create order
+
             $order = Order::create([
                 'user_id'         => $user->id,
                 'total'           => $total,
@@ -174,7 +166,7 @@ class CheckoutController extends Controller
                 'address_id'      => $addressId,
             ]);
 
-            // Create order items + decrement stock
+
             foreach ($items as $it) {
                 $qty   = (int) ($it['quantity'] ?? 1);
                 $price = (float) ($it['price'] ?? 0);
@@ -199,7 +191,7 @@ class CheckoutController extends Controller
                 }
             }
 
-            // Clear sessions and cart items (keep cart row)
+
             session()->forget('checkout.direct');
             session()->forget('checkout_items');
             session()->forget('checkout.address_id');
@@ -218,9 +210,7 @@ class CheckoutController extends Controller
         }
     }
 
-    /**
-     * Selected checkout: caches selected cart items to session then redirects to checkout
-     */
+
     public function checkoutSelected(Request $request)
     {
         $selectedIds = $request->input('selected', []);
@@ -255,9 +245,9 @@ class CheckoutController extends Controller
         return redirect()->route('checkout');
     }
 
-    // =======================
-    // Payment pages
-    // =======================
+
+    // Halaman Pembayaran
+
 
     public function bankTransfer()
     {
@@ -277,21 +267,13 @@ class CheckoutController extends Controller
         return view('pages.payments.ewallet');
     }
 
-    // =======================
-    // Helpers
-    // =======================
 
-    /**
-     * Build checkout items array from (session selected | session direct | DB cart)
-     */
     private function buildCheckoutItemsFromSources($user): array
     {
-        // 1) Selected items in session
         if (session('checkout_items')) {
             return session('checkout_items');
         }
 
-        // 2) Direct checkout session
         if (session('checkout.direct')) {
             $data    = session('checkout.direct');
             $product = Product::find($data['product_id']);
@@ -316,7 +298,6 @@ class CheckoutController extends Controller
             ];
         }
 
-        // 3) Fallback: cart items from DB
         $cart  = Cart::firstOrCreate(['user_id' => $user->id]);
         $items = $cart->items()->with('product')->get();
 

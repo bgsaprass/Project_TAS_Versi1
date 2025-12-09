@@ -43,7 +43,7 @@
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="city" class="form-label">Kota</label>
+                        <label for="city" class="form-label">Kabupaten / Kota</label>
                         <input type="text" name="city" id="city"
                                class="form-control" value="{{ old('city', $address->city) }}" required>
                     </div>
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary">💾 Update Alamat</button>
+                    <button type="submit" class="btn btn-primary">Update Alamat</button>
                     <a href="{{ route('profile') }}" class="btn btn-outline-secondary">← Kembali ke Profil</a>
                 </div>
             </form>

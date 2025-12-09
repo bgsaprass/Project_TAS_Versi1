@@ -10,9 +10,7 @@ use App\Models\CartItem;
 
 class CartController extends Controller
 {
-    /**
-     * Tampilkan isi keranjang
-     */
+
     public function index()
     {
         // Buat cart jika belum ada untuk user login
@@ -27,14 +25,12 @@ class CartController extends Controller
         return view('pages.cart', compact('items', 'subtotal'));
     }
 
-    /**
-     * Tambah produk ke keranjang
-     */
+
     public function add(Request $request, $productId)
     {
         $product = Product::findOrFail($productId);
 
-        // Validasi stok
+       
         if ($product->stock < 1) {
             return back()->with('error', 'Stok produk habis.');
         }
@@ -43,7 +39,7 @@ class CartController extends Controller
 
         $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
 
-        // Cari item di cart, kalau belum ada buat baru
+
         $item = $cart->items()->firstOrNew(['product_id' => $productId]);
         $item->quantity = $item->exists
             ? min($item->quantity + $quantity, $product->stock)
@@ -53,9 +49,7 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Produk ditambahkan ke keranjang.');
     }
 
-    /**
-     * Update jumlah produk di keranjang
-     */
+
     public function update(Request $request, $productId)
     {
         $cart = Auth::user()->cart;
@@ -95,9 +89,7 @@ class CartController extends Controller
         return back()->with('success', 'Keranjang diperbarui.');
     }
 
-    /**
-     * Hapus produk dari keranjang
-     */
+
     public function remove($productId)
     {
         $cart = Auth::user()->cart;
@@ -129,7 +121,7 @@ class CartController extends Controller
         $ongkir = 10000;
         $total = $subtotal + $ongkir;
 
-        // Simpan data checkout ke session atau lanjut ke halaman pembayaran
+
         return view('pages.checkout', compact('items', 'subtotal', 'ongkir', 'total'));
     }
 }

@@ -24,6 +24,7 @@
             @endforeach
         </ul>
     </div>
+    
     <!-- Footer Start -->
     @include('assets.footer')
     <!-- Footer End -->

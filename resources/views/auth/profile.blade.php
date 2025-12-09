@@ -17,8 +17,7 @@
                 <div class="top-link pe-2">
                     <a href="#" class="text-white"><small class="text-white mx-2">Kebijakan Privasi</small>/</a>
                     <a href="#" class="text-white"><small class="text-white mx-2">Syarat Penggunaan</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white ms-2">Penjualan &
-                            Pengembalian</small></a>
+                    <a href="#" class="text-white"><small class="text-white ms-2">Penjualan & Pengembalian</small></a>
                 </div>
             </div>
         </div>
@@ -27,8 +26,7 @@
                 <a href="{{ route('welcome') }}" class="navbar-brand">
                     <h1 class="text-primary display-6">CepatBeli</h1>
                 </a>
-                <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
+                <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars text-primary"></span>
                 </button>
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
@@ -127,13 +125,9 @@
                             <a href="{{ route('orders') }}" class="btn btn-outline-success">
                                 <i class="fa fa-box me-2"></i> Lihat Pesanan Saya
                             </a>
-
-                            <!-- Tombol Informasi Akun -->
                             <a href="{{ route('account.info') }}" class="btn btn-outline-primary">
                                 <i class="fa fa-info-circle me-2"></i> Informasi Akun
                             </a>
-
-
                             <div class="collapse mt-3" id="accountInfo">
                                 <div class="card card-body">
                                     <!-- Ubah Sandi -->

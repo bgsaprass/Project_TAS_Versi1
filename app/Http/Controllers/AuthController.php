@@ -18,17 +18,17 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // Validasi input
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        // Coba autentikasi
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // Restore cart from DB if exists
+
             try {
                 $cart = \App\Models\Cart::where('user_id', Auth::id())->first();
                 if ($cart && is_array($cart->data)) {
@@ -38,7 +38,7 @@ class AuthController extends Controller
                     session(['cart' => $merged]);
                 }
             } catch (\Exception $e) {
-                // ignore
+
             }
 
             // ensure cart row exists
@@ -47,7 +47,7 @@ class AuthController extends Controller
             return redirect()->intended('/');
         }
 
-        // Jika gagal
+
         return back()->withErrors([
             'email' => 'Email atau password salah.',
         ]);
@@ -55,7 +55,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        // Before logout, persist session cart to DB so it survives logout
+
         try {
             if (Auth::check()) {
                 $cartData = session('cart', []);
@@ -65,7 +65,7 @@ class AuthController extends Controller
                 );
             }
         } catch (\Exception $e) {
-            // ignore
+
         }
 
         Auth::logout();
@@ -85,15 +85,14 @@ class AuthController extends Controller
         'new_password'     => 'required|min:6|confirmed',
     ]);
 
-    $user = User::findOrFail(Auth::id()); // ambil ulang sebagai model Eloquent
+    $user = User::findOrFail(Auth::id());
 
     if (!Hash::check($request->current_password, $user->password)) {
         return back()->withErrors(['current_password' => 'Password lama salah']);
     }
 
     $user->password = Hash::make($request->new_password);
-    $user->save(); // sekarang pasti dikenali IDE dan jalan
-
+    $user->save(); 
     return redirect()->route('profile')->with('success', 'Password berhasil diubah');
 }
 

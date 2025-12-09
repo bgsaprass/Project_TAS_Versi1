@@ -30,11 +30,11 @@
 
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Cart</h1>
+        <h1 class="text-center text-white display-6">Keranjang</h1>
         <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Cart</li>
+            <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+            <li class="breadcrumb-item"><a href="#">Halaman</a></li>
+            <li class="breadcrumb-item active text-white">Keranjang</li>
         </ol>
     </div>
     <!-- Single Page Header End -->
@@ -64,7 +64,7 @@
 
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="city" class="form-label">Kota</label>
+                    <label for="city" class="form-label">Kabupaten / Kota</label>
                     <input type="text" name="city" id="city" class="form-control" required>
                 </div>
                 <div class="col-md-6 mb-3">
@@ -79,7 +79,7 @@
             </div>
 
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">💾 Simpan Alamat</button>
+                <button type="submit" class="btn btn-primary">Simpan Alamat</button>
                 <a href="{{ route('checkout') }}" class="btn btn-outline-secondary">← Kembali ke Checkout</a>
             </div>
         </form>

@@ -8,7 +8,7 @@ class CartItem extends Model
 {
     protected $fillable = ['cart_id', 'product_id', 'quantity', 'selected'];
 
-    // ✅ Tambahkan relasi ke Cart
+    
     public function cart()
     {
         return $this->belongsTo(Cart::class);

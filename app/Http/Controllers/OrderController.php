@@ -7,9 +7,7 @@ use App\Models\Order;
 
 class OrderController extends Controller
 {
-    /**
-     * Menampilkan semua pesanan milik user
-     */
+
     public function index()
     {
         $user = Auth::user();
@@ -22,9 +20,7 @@ class OrderController extends Controller
         return view('pages.orders', compact('orders'));
     }
 
-    /**
-     * Menampilkan detail satu pesanan milik user
-     */
+   
     public function show($id)
     {
         $user = Auth::user();

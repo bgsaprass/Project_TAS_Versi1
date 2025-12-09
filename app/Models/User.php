@@ -45,25 +45,19 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    /**
-     * Relasi ke CartItem (jika kamu ingin akses langsung item milik user).
-     */
+
     public function cartItems()
     {
         return $this->hasMany(CartItem::class);
     }
 
-    /**
-     * Relasi ke Address (alamat-alamat milik user).
-     */
+
     public function addresses()
     {
         return $this->hasMany(Address::class);
     }
 
-    /**
-     * Relasi ke Cart (satu keranjang per user).
-     */
+    
     public function cart()
     {
         return $this->hasOne(Cart::class);

@@ -20,7 +20,6 @@ use App\Http\Controllers\ProfileController;
 
 // PUBLIC ROUTES
 
-
 Route::get('/', function (Request $request) {
     $categories = Category::withCount('products')->get();
 
@@ -50,7 +49,6 @@ Route::get('/', function (Request $request) {
         'search' => $request->search,
     ]);
 })->name('welcome');
-
 
 // AUTH ROUTES
 
@@ -95,9 +93,7 @@ Route::get('/profile', fn() => view('auth.profile'))->middleware('auth')->name('
 Route::get('/password/change', [AuthController::class, 'changeForm'])->middleware('auth')->name('password.change');
 Route::post('/password/change', [AuthController::class, 'changePassword'])->middleware('auth')->name('password.update');
 
-Route::get('/account/info', fn() => view('auth.account-info'))
-    ->middleware('auth')
-    ->name('account.info');
+Route::get('/account/info', fn() => view('auth.account-info'))->middleware('auth')->name('account.info');
 Route::put('/profile/update-name', [ProfileController::class, 'updateName'])->name('profile.updateName');
 
 
@@ -117,27 +113,18 @@ Route::get('/search-products', [ShopController::class, 'searchAjax'])->name('sea
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-
-
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-
-
     Route::middleware(\App\Http\Middleware\PreventAdminPurchase::class)->group(function () {
-
         Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
         Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
         Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
         Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-
-
         Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
         Route::post('/checkout-selected', [CheckoutController::class, 'checkoutSelected'])->name('checkout.selected');
         Route::post('/checkout/direct/{id}', [CheckoutController::class, 'direct'])->name('checkout.direct');
         Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
         Route::post('/checkout/finalize', [CheckoutController::class, 'finalize'])->name('checkout.finalize');
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-
-
         Route::get('/checkout/bank', [CheckoutController::class, 'bankTransfer'])->name('checkout.bank');
         Route::get('/checkout/cod', [CheckoutController::class, 'cod'])->name('checkout.cod');
         Route::get('/checkout/ewallet', [CheckoutController::class, 'eWallet'])->name('checkout.ewallet');
@@ -161,38 +148,23 @@ Route::post('/address/store', [AddressController::class, 'store'])->middleware('
 // Address edit
 Route::get('/address/{id}/edit', [AddressController::class, 'edit'])->middleware('auth')->name('address.edit');
 Route::put('/address/{id}', [AddressController::class, 'update'])->middleware('auth')->name('address.update');
-Route::delete('/address/{id}', [AddressController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('address.destroy');
+Route::delete('/address/{id}', [AddressController::class, 'destroy'])->middleware('auth')->name('address.destroy');
 
 
 
 // ADMIN ROUTES
-
 Route::prefix('admin')
     ->middleware(['auth', \App\Http\Middleware\IsAdmin::class])->name('admin.')->group(function () {
-
         Route::get('/dashboard', [AdminController::class, 'index'])->name('index');
-
         Route::resource('products', ProductController::class);
-
-
         Route::resource('users', UsersController::class);
-
-
         Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
         Route::get('/orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
         Route::put('/orders/{order}/update-status', [\App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.updateStatus');
         Route::get('/users/{user}/orders', [\App\Http\Controllers\Admin\OrderController::class, 'userOrders']) ->name('users.orders');
         Route::put('/orders/{order}/update-shipping', [\App\Http\Controllers\Admin\OrderController::class, 'updateShipping'])->name('orders.updateShipping');
-
-
-
-
         Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
         Route::get('/sales', [AdminController::class, 'sales'])->name('sales');
-
-
         Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
         Route::post('/settings', [AdminController::class, 'updateSettings'])->name('settings.update');
     });

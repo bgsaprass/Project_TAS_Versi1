@@ -10,7 +10,7 @@ class ShopController extends Controller
 {
     private function filterProducts(Request $request)
     {
-        $products = Product::with('category'); // eager loading kategori
+        $products = Product::with('category');
 
         // Filter kategori
         if ($request->filled('category') && Category::find($request->category)) {
@@ -25,23 +25,23 @@ class ShopController extends Controller
         // Sortir produk
         switch ($request->sort) {
             case 'popular':
-                $products->orderBy('views', 'desc'); // atau jumlah order
+                $products->orderBy('views', 'desc');
                 break;
             case 'best':
-                $products->orderBy('rating', 'desc'); // rating tertinggi
+                $products->orderBy('rating', 'desc');
                 break;
             case 'price_asc':
-                $products->orderBy('price', 'asc'); // harga termurah
+                $products->orderBy('price', 'asc');
                 break;
             case 'price_desc':
-                $products->orderBy('price', 'desc'); // harga termahal
+                $products->orderBy('price', 'desc');
                 break;
             case 'newest':
-                $products->orderBy('created_at', 'desc'); // produk terbaru
+                $products->orderBy('created_at', 'desc');
                 break;
         }
 
-        return $products->paginate(12); // gunakan paginate agar lebih rapi
+        return $products->paginate(12); 
     }
 
     public function index(Request $request)

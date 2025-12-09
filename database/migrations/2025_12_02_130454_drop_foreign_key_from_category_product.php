@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // Ini seharusnya HANYA membuat tabel categories
+
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -17,8 +17,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // JIKA ADA kode berikut, HAPUS:
-        // Schema::create('category_product', ...)
+        
     }
 
     public function down(): void

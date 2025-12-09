@@ -125,12 +125,12 @@
 
                     <hr>
 
-                    <!-- Ubah Sandi -->
+
                     <a href="{{ route('password.change') }}" class="btn btn-outline-warning mb-3">
                         <i class="fa fa-key me-2"></i> Ubah Sandi
                     </a>
 
-                    <!-- Alamat -->
+
                     <h5 class="mt-4">Alamat Tersimpan</h5>
 
                     @if (Auth::user()->addresses->count())
@@ -161,7 +161,7 @@
                         <p class="text-muted">Belum ada alamat tersimpan.</p>
                     @endif
 
-                    <!-- Tombol Tambah Alamat -->
+                    
                     <a href="{{ route('address.create') }}" class="btn btn-outline-primary mt-2">
                         <i class="fa fa-plus me-2"></i> Tambah Alamat
                     </a>

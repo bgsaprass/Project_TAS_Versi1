@@ -8,13 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
-    // Form tambah alamat
     public function create()
     {
         return view('address.create');
     }
 
-    // Simpan alamat baru
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -33,7 +32,7 @@ class AddressController extends Controller
         return redirect()->route('checkout')->with('success', 'Alamat berhasil ditambahkan.');
     }
 
-    // Form edit alamat
+
     public function edit($id)
     {
         $address = Address::where('id', $id)
@@ -43,7 +42,7 @@ class AddressController extends Controller
         return view('address.edit', compact('address'));
     }
 
-    // Update alamat
+
     public function update(Request $request, $id)
     {
         $address = Address::where('id', $id)
@@ -64,7 +63,7 @@ class AddressController extends Controller
         return redirect()->route('profile')->with('success', 'Alamat berhasil diperbarui.');
     }
 
-    // Hapus alamat
+   
     public function destroy($id)
     {
         $address = Address::where('id', $id)

@@ -85,16 +85,16 @@
                                                     clip-rule="evenodd"></path>
                                             </svg>
                                             <span class="text-gray-400 ml-1 md:ml-2 text-sm font-medium"
-                                                aria-current="page">Products</span>
+                                                aria-current="page">Produk</span>
                                         </div>
                                     </li>
                                 </ol>
                             </nav>
-                            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">All products</h1>
+                            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Semua produk</h1>
                         </div>
                         <div class="block sm:flex items-center md:divide-x md:divide-gray-100">
                             <form class="sm:pr-3 mb-4 sm:mb-0" action="#" method="GET">
-                                <label for="products-search" class="sr-only">Search</label>
+                                <label for="products-search" class="sr-only">Cari</label>
                                 <div class="mt-1 relative sm:w-64 xl:w-96">
                                     <input type="text" name="email" id="products-search"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
@@ -148,7 +148,7 @@
                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    Add product
+                                    Tambah produk
                                 </button>
                             </div>
                         </div>
@@ -165,23 +165,23 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <th class="px-6 py-3">
-                                <a href="?sort_by=name&order={{ $order === 'asc' ? 'desc' : 'asc' }}">Name</a>
+                                <a href="?sort_by=name&order={{ $order === 'asc' ? 'desc' : 'asc' }}">Nama</a>
                             </th>
                             <th class="px-6 py-3">
                                 <a
-                                    href="?sort_by=category_id&order={{ $order === 'asc' ? 'desc' : 'asc' }}">Category</a>
+                                    href="?sort_by=category_id&order={{ $order === 'asc' ? 'desc' : 'asc' }}">Kategori</a>
                             </th>
                             <th class="px-6 py-3">
-                                <a href="?sort_by=brand&order={{ $order === 'asc' ? 'desc' : 'asc' }}">Brand</a>
+                                <a href="?sort_by=brand&order={{ $order === 'asc' ? 'desc' : 'asc' }}">Merk</a>
                             </th>
                             <th class="px-6 py-3">
-                                <a href="?sort_by=price&order={{ $order === 'asc' ? 'desc' : 'asc' }}">Price</a>
+                                <a href="?sort_by=price&order={{ $order === 'asc' ? 'desc' : 'asc' }}">Harga</a>
                             </th>
                             <th class="px-6 py-3">
-                                <a href="?sort_by=stock&order={{ $order === 'asc' ? 'desc' : 'asc' }}">Stock</a>
+                                <a href="?sort_by=stock&order={{ $order === 'asc' ? 'desc' : 'asc' }}">Stok</a>
                             </th>
-                            <th class="px-6 py-3">Image</th>
-                            <th class="px-6 py-3">Actions</th>
+                            <th class="px-6 py-3">Gambar</th>
+                            <th class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -210,14 +210,11 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex gap-2 items-center">
-                                        <!-- Tombol Edit -->
                                         <button type="button"
                                             class="px-3 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-700 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                                             data-modal-toggle="edit-product-modal-{{ $product->id }}">
                                             Edit
                                         </button>
-
-                                        <!-- Tombol Hapus -->
                                         <form action="{{ route('admin.products.destroy', $product->id) }}"
                                             method="POST"
                                             onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
@@ -243,11 +240,9 @@
                     </tbody>
                 </table>
 
-                {{-- <div class="mt-4">
-                    {{ $products->links() }}
-                </div> --}}
-
                 {{-- Table End --}}
+
+                {{-- Navigasi Start --}}
                 <div class="bg-white sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-4">
                     <div class="flex items-center mb-4 sm:mb-0">
                         @if ($products->onFirstPage())
@@ -343,6 +338,8 @@
                     </div>
                 </div>
 
+                {{-- Navigasi Start --}}
+
                 <!-- Add Product Modal -->
                 <div class="hidden overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center h-modal sm:h-full"
                     id="add-product-modal">
@@ -373,19 +370,18 @@
                                     <div class="grid grid-cols-6 gap-6">
                                         <div class="col-span-6 sm:col-span-3">
                                             <label for="name"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Product
-                                                Name</label>
+                                                class="text-sm font-medium text-gray-900 block mb-2">Nama Produk</label>
                                             <input type="text" name="name" id="name"
                                                 class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600"
-                                                placeholder="Apple iMac 27”" required>
+                                                placeholder="Masukkan Nama Produk" required>
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-6">
                                             <label
-                                                class="text-sm font-medium text-gray-900 block mb-2">Category</label>
+                                                class="text-sm font-medium text-gray-900 block mb-2">Kategori</label>
                                             <select name="category_id" id="category_id" required
                                                 class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600">
-                                                <option value="">-- Select category --</option>
+                                                <option value="">-- Pilih Kategori --</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}"
                                                         {{ old('category_id') == $category->id ? 'selected' : '' }}>
@@ -393,39 +389,35 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-
                                         </div>
-
 
                                         <div class="col-span-6 sm:col-span-3">
                                             <label for="brand"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Brand</label>
+                                                class="text-sm font-medium text-gray-900 block mb-2">Merk</label>
                                             <input type="text" name="brand" id="brand"
                                                 class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600"
-                                                placeholder="Apple">
+                                                placeholder="Masukkan Merk Produk" required>
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3">
                                             <label for="price"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Price</label>
+                                                class="text-sm font-medium text-gray-900 block mb-2">Harga</label>
                                             <input type="number" name="price" id="price"
                                                 class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600"
-                                                placeholder="2300" required>
+                                                placeholder="Masukkan Harga" required>
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3">
                                             <label for="stock"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Initial
-                                                Stock</label>
+                                                class="text-sm font-medium text-gray-900 block mb-2">Stok</label>
                                             <input type="number" name="stock" id="stock"
                                                 class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600"
-                                                placeholder="100" required>
+                                                placeholder="Masukkan Stok" required>
                                         </div>
 
                                         <div class="col-span-6 sm:col-span-3">
                                             <label for="image"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Product
-                                                Image</label>
+                                                class="text-sm font-medium text-gray-900 block mb-2">Gambar Produk</label>
                                             <input type="file" name="image" id="image" accept="image/*"
                                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none"
                                                 required>
@@ -433,24 +425,21 @@
 
                                         <div class="col-span-full">
                                             <label for="description"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Product
-                                                Details</label>
+                                                class="text-sm font-medium text-gray-900 block mb-2">Produk Detail</label>
                                             <textarea name="description" id="description" rows="6"
                                                 class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-4 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600"
-                                                placeholder="e.g. Intel Core i7, 512GB SSD, 16GB RAM" required></textarea>
+                                                placeholder="Produk ini dibuat dengan Bahan Bahan Berkualitas" required></textarea>
                                         </div>
                                     </div>
 
                                     <div class="pt-6 border-t border-gray-200 rounded-b">
                                         <button type="submit"
                                             class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                            Add Product
+                                            Tambah Produk
                                         </button>
                                     </div>
                                 </form>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -465,7 +454,7 @@
                             <div class="bg-white rounded-lg shadow relative">
                                 <!-- Modal header -->
                                 <div class="flex items-start justify-between p-5 border-b rounded-t">
-                                    <h3 class="text-xl font-semibold">Edit product</h3>
+                                    <h3 class="text-xl font-semibold">Edit produk</h3>
                                     <button type="button"
                                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                                         data-modal-toggle="edit-product-modal-{{ $product->id }}">
@@ -487,8 +476,7 @@
                                         <div class="grid grid-cols-6 gap-6">
                                             <div class="col-span-6 sm:col-span-3">
                                                 <label for="name"
-                                                    class="text-sm font-medium text-gray-900 block mb-2">Product
-                                                    Name</label>
+                                                    class="text-sm font-medium text-gray-900 block mb-2">Nama Produk</label>
                                                 <input type="text" name="name" id="name"
                                                     value="{{ $product->name }}"
                                                     class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600"
@@ -497,10 +485,10 @@
 
                                             <div class="col-span-6 sm:col-span-3">
                                                 <label for="category_id"
-                                                    class="text-sm font-medium text-gray-900 block mb-2">Category</label>
+                                                    class="text-sm font-medium text-gray-900 block mb-2">Kategori</label>
                                                 <select name="category_id" id="category_id" required
                                                     class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600">
-                                                    <option value="">-- Select category --</option>
+                                                    <option value="">-- Pilih Kategori --</option>
                                                     @foreach ($categories as $cat)
                                                         <option value="{{ $cat->id }}"
                                                             {{ old('category_id', $product->category_id) == $cat->id ? 'selected' : '' }}>
@@ -513,7 +501,7 @@
 
                                             <div class="col-span-6 sm:col-span-3">
                                                 <label for="brand"
-                                                    class="text-sm font-medium text-gray-900 block mb-2">Brand</label>
+                                                    class="text-sm font-medium text-gray-900 block mb-2">Merk</label>
                                                 <input type="text" name="brand" id="brand"
                                                     value="{{ $product->brand }}"
                                                     class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600">
@@ -521,7 +509,7 @@
 
                                             <div class="col-span-6 sm:col-span-3">
                                                 <label for="price"
-                                                    class="text-sm font-medium text-gray-900 block mb-2">Price</label>
+                                                    class="text-sm font-medium text-gray-900 block mb-2">Harga</label>
                                                 <input type="number" name="price" id="price"
                                                     value="{{ $product->price }}"
                                                     class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600"
@@ -530,8 +518,7 @@
 
                                             <div class="col-span-6 sm:col-span-3">
                                                 <label for="stock"
-                                                    class="text-sm font-medium text-gray-900 block mb-2">Initial
-                                                    Stock</label>
+                                                    class="text-sm font-medium text-gray-900 block mb-2">Stok Barang</label>
                                                 <input type="number" name="stock" id="stock"
                                                     value="{{ $product->stock }}"
                                                     class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-2.5 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600"
@@ -539,8 +526,7 @@
                                             </div>
 
                                             <div class="col-span-6 sm:col-span-3">
-                                                <label class="text-sm font-medium text-gray-900 block mb-2">Current
-                                                    Image</label>
+                                                <label class="text-sm font-medium text-gray-900 block mb-2">Gambar</label>
                                                 @if ($product->image && file_exists(public_path('img/' . $product->image)))
                                                     <div
                                                         class="w-20 h-20 overflow-hidden rounded border border-gray-300 shadow-sm">
@@ -549,22 +535,20 @@
                                                             class="w-full h-full object-cover">
                                                     </div>
                                                 @else
-                                                    <span class="text-gray-400 italic">No image</span>
+                                                    <span class="text-gray-400 italic">Tidak Ada Gambar</span>
                                                 @endif
                                             </div>
 
                                             <div class="col-span-6 sm:col-span-3">
                                                 <label for="image"
-                                                    class="text-sm font-medium text-gray-900 block mb-2">Upload New
-                                                    Image</label>
+                                                    class="text-sm font-medium text-gray-900 block mb-2">Unggah Gambar Baru</label>
                                                 <input type="file" name="image" id="image" accept="image/*"
                                                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none">
                                             </div>
 
                                             <div class="col-span-full">
                                                 <label for="description"
-                                                    class="text-sm font-medium text-gray-900 block mb-2">Product
-                                                    Details</label>
+                                                    class="text-sm font-medium text-gray-900 block mb-2">Produk Detail</label>
                                                 <textarea name="description" id="description" rows="6"
                                                     class="bg-gray-50 border border-gray-300 rounded-lg block w-full p-4 text-sm text-gray-900 focus:ring-cyan-600 focus:border-cyan-600"
                                                     required>{{ $product->description }}</textarea>
@@ -574,7 +558,7 @@
                                         <div class="pt-6 border-t border-gray-200 rounded-b">
                                             <button type="submit"
                                                 class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                                Save all
+                                                Simpan Semua
                                             </button>
                                         </div>
                                     </form>
@@ -602,7 +586,7 @@
                                             d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                     <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">
-                                        Are you sure you want to delete <strong>{{ $product->name }}</strong>?
+                                        Apakah anda yakin ingin menghapus <strong>{{ $product->name }}</strong>?
                                     </h3>
                                     <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
                                         class="inline-block">
@@ -610,27 +594,21 @@
                                         @method('DELETE')
                                         <button type="submit"
                                             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
-                                            Yes, I'm sure
+                                            Ya, saya yakin
                                         </button>
                                     </form>
                                     <button type="button"
                                         class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium rounded-lg text-base px-3 py-2.5 text-center"
                                         data-modal-toggle="delete-product-modal-{{ $product->id }}">
-                                        No, cancel
+                                        Tidak, batalkan
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
-
-
-
-
             </main>
-
         </div>
-
     </div>
 
 
@@ -639,5 +617,4 @@
     <script src="https://themewagon.github.io/windster/app.bundle.js"></script>
     <script src="https://unpkg.com/flowbite@latest/dist/flowbite.min.js"></script>
 </body>
-
 </html>

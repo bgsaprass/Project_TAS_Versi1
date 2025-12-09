@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // HANYA buat tabel categories jika belum ada
+        
         if (!Schema::hasTable('categories')) {
             Schema::create('categories', function (Blueprint $table) {
                 $table->id();
@@ -19,7 +19,7 @@ return new class extends Migration
             });
         }
 
-        
+
     }
 
     public function down(): void
